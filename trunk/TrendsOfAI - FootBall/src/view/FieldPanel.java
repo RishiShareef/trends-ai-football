@@ -71,6 +71,10 @@ public class FieldPanel extends JPanel {
 		g.drawLine(_xSize-165, rectPosY, _xSize-165, _ySize - rectPosY);
 		
 		g.drawArc(_xSize/2-94, _ySize/2-94, 188, 188, 0, 360);
+		
+		g.setColor(new Color(20, 20, 10));
+		g.fillRect(0, _ySize/2 - 37, 3, 74);
+		g.fillRect(_xSize-5, _ySize/2 - 37, 3, 74);
 	}
 	
 	public int getXSize() {return _xSize;}

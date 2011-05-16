@@ -6,10 +6,10 @@ import javax.swing.JFrame;
 
 import model.Ball;
 import model.Match;
+import model.Team;
 
 public class MainFrame extends JFrame {
 
-	private Match _match;
 	private FieldPanel _fieldPanel;
 	private final static int _xSize = 1000, _ySize = 600;
 	boolean _finished;
@@ -19,8 +19,6 @@ public class MainFrame extends JFrame {
 		setSize(_xSize, _ySize);
 		setVisible(true);
 		_fieldPanel = new FieldPanel(_xSize, _ySize);
-		_match = new Match(_fieldPanel);
-		_fieldPanel.initialiseParameters(_match.getBall(), _match.getAllPlayers());
 		setContentPane(_fieldPanel);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Football modeliser");
@@ -29,9 +27,11 @@ public class MainFrame extends JFrame {
 	}
 	
 	private void run(){
-		while(!_finished){
-			_match.acts();
-			_fieldPanel.repaint();
-		}
+		Team teamHome = new Team(_fieldPanel.getSize());
+		Team teamVisitor = new Team(_fieldPanel.getSize());
+		Match match = new Match(teamHome, teamVisitor, _fieldPanel);
+		_fieldPanel.initialiseParameters(match.getBall(), match.getAllPlayers());
+		
+		match.start();
 	}
 }
