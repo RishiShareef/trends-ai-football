@@ -67,4 +67,7 @@ public class FieldPanel extends JPanel {
 		
 		g.drawArc(_xSize/2-94, _ySize/2-94, 188, 188, 0, 360);
 	}
+	
+	public int getXSize() {return _xSize;}
+	public int getYSize() {return _ySize;}
 }
