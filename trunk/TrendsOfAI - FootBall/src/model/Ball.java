@@ -10,7 +10,6 @@ public class Ball {
 		_yPosition = yPosition;
 		_radius = 7;
 	}
-	
 
 	public int getRadius() {return _radius;}
 	public int getXPosition() {return _xPosition;}
