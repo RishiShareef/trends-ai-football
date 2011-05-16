@@ -38,12 +38,17 @@ public class FieldPanel extends JPanel {
 		int xPosition = _ball.getXPosition() - _ball.getRadius();
 		int yPosition = _ball.getYPosition() - _ball.getRadius();
 		int diameter = 2*_ball.getRadius();
+		g.setColor(Color.WHITE);
 		g.fillArc(xPosition, yPosition, diameter, diameter, 0, 360);
 	}
 
 	private void drawPlayers(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		for(Player player : _ar_player){
+			int xPosition = player.getXPosition() - (player.getSize()/2);
+			int yPosition = player.getYPosition() - (player.getSize()/2);
+			g.setColor(player.getColor());
+			g.fillRect(xPosition, yPosition, player.getSize(), player.getSize()); 
+		}
 	}
 
 	private void initialiseField(Graphics g) {
