@@ -2,7 +2,7 @@ package model;
 
 public class Keeper extends Player {
 
-	public Keeper() {
-		
+	public Keeper(Team team, int xPosition, int yPosition) {
+		super(team, xPosition, yPosition);
 	}
 }
