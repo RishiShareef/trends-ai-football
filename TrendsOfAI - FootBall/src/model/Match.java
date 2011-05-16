@@ -1,42 +1,63 @@
 package model;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Random;
 
 import view.FieldPanel;
 
-public class Match {
+public class Match extends Thread {
+	
+	private Team _teamHome, _teamVisitor;
+	private Ball _ball;
+	private FieldPanel _fieldPanel;
 
-	public Match(FieldPanel fieldPanel){
-		this.fieldPanel = fieldPanel;
-		_team1 = new Team(fieldPanel, this, Color.BLUE);
-		_team2 = new Team(fieldPanel, this, Color.RED);
-		_ball = new Ball(fieldPanel.getXSize()/2,fieldPanel.getYSize()/2);
+	public Match(Team teamHome, Team teamVisitor, FieldPanel fieldPanel){
+		_fieldPanel = fieldPanel;
+		_teamHome = teamHome;
+		_teamHome.beginMatch(this, Color.BLUE, Location.HOME);
+		_teamVisitor = teamVisitor;
+		_teamVisitor.beginMatch(this, Color.RED, Location.VISITOR);
+		_ball = new Ball(fieldPanel.getWidth()/2,fieldPanel.getHeight()/2);
 	}
 	
-	public void acts(){
-		Random random = new Random();
-		if(random.nextBoolean()){
-			_team1.acts();
-			_team2.acts();
-		}else{
-			_team2.acts();
-			_team1.acts();
+	public void run() {
+		int time = 0;
+		while(time < 1000) {
+			time++;
+			System.out.println("Match::run >> minute " + time);
+//			System.out.println("ball position " + _ball.getPosition());
+			
+			_teamHome.acts(_ball);
+			_teamVisitor.acts(_ball);
+			
+			_ball.updatePosition();
+			checkGoal();
+			_fieldPanel.repaint();
+			try {
+				sleep(100);
+			} catch (Exception e) {e.printStackTrace();}
 		}
 	}
 	
 	public ArrayList<Player> getAllPlayers(){
-		ArrayList<Player> ar_allPlayers = _team1.getPlayers();
-		for(Player player : _team2.getPlayers())
-			ar_allPlayers.add(player);
+		ArrayList<Player> ar_allPlayers = _teamHome.getPlayers();
+		ar_allPlayers.addAll(_teamVisitor.getPlayers());
 		return ar_allPlayers;
 	}
 	
-	public Ball getBall(){return _ball;}
+	public void checkGoal() {
+		if(_ball.getXPosition() <= 0 && _ball.getYPosition() <= _fieldPanel.getHeight()/2 + 37 && _ball.getYPosition() >= _fieldPanel.getHeight()/2 - 37) {
+			_ball.setPosition(_fieldPanel.getWidth()/2, _fieldPanel.getHeight()/2);
+			System.out.println("Visitor scored !");
+		}
+		else if(_ball.getXPosition() >= _fieldPanel.getWidth() && _ball.getYPosition() <= _fieldPanel.getHeight()/2 + 37 && _ball.getYPosition() >= _fieldPanel.getHeight()/2 - 37) {
+			_ball.setPosition(_fieldPanel.getWidth()/2, _fieldPanel.getHeight()/2);
+			System.out.println("Home scored !");
+		}
+	}
 	
-	private FieldPanel fieldPanel;
-	private Team _team1, _team2;
-	private Ball _ball;
+	public Ball getBall(){return _ball;}
 	
 }
