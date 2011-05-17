@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class Player {
 	
+	protected double _tactic;
 	protected double _visibility = 500;
 	protected int _xPosition;
 	protected int _yPosition;
@@ -50,9 +51,13 @@ public class Player {
 //			}
 //		}
 		if(_hasBall) {
-			Random random = new Random();
-			ball.shoot(random.nextInt(_team.getXFieldDimension()), random.nextInt(_team.getYFieldDimension()));
 			_hasBall = false;
+			System.out.println("my tactic : " + _tactic);
+			if(_tactic==0){
+				_team.score();
+			}else if(_tactic==1){
+				_team.passToRandomPlayer(ball);
+			}
 		}
 		
 	}
@@ -74,6 +79,13 @@ public class Player {
 		_hasBall = true;
 	}
 	
+	public void setPosition(int posX, int posY){
+		this._xPosition = posX;
+		this._yPosition = posY;
+	}
+	
+	public boolean hasBall(){return _hasBall;}
+	public void setTactic(double tactic){_tactic=tactic;}
 	public int getXPosition(){return _xPosition;}
 	public int getYPosition(){return _yPosition;}
 	public Color getColor(){return _color;}
