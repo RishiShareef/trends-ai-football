@@ -16,7 +16,7 @@ public class MainFrame extends JFrame {
 	
 	public MainFrame() {
 		_finished = false;
-		setSize(_xSize, _ySize);
+		setSize(_xSize, _ySize+40);
 		setVisible(true);
 		_fieldPanel = new FieldPanel(_xSize, _ySize);
 		setContentPane(_fieldPanel);
