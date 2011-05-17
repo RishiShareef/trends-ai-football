@@ -24,13 +24,22 @@ public class Match extends Thread {
 	
 	public void run() {
 		int time = 0;
+		boolean intercetion = false;
 		while(time < 1000) {
 			time++;
 			System.out.println("Match::run >> minute " + time);
 //			System.out.println("ball position " + _ball.getPosition());
 			
-			_teamHome.acts(_ball);
-			_teamVisitor.acts(_ball);
+			if(!intercetion) {
+//				double minDistance =
+			}
+			
+			for(Player player : getAllPlayers()) {
+				player.acts(_ball);
+			}
+			for(Player player : getAllPlayers()) {
+				player.interceptBall(_ball);
+			}
 			
 			_ball.updatePosition();
 			checkGoal();

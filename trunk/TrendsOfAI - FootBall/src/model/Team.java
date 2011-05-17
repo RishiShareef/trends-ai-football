@@ -74,4 +74,6 @@ public class Team {
 		default : return null;
 		}
 	}
+	public int getXFieldDimension() {return _fieldDimension.width;}
+	public int getYFieldDimension() {return _fieldDimension.height;}
 }
