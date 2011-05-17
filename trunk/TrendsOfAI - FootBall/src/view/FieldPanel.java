@@ -9,13 +9,15 @@ import javax.swing.JPanel;
 
 import model.Ball;
 import model.Player;
+import model.Team;
 
 public class FieldPanel extends JPanel {
 
 	private int _xSize, _ySize;
 	private Ball _ball;
 	private ArrayList<Player> _ar_player;
-	
+	private Team _teamHome, _teamVisitor;
+
 	public FieldPanel(int xSize, int ySize) {
 		_xSize = xSize;
 		_ySize = ySize;
@@ -23,15 +25,18 @@ public class FieldPanel extends JPanel {
 		repaint();
 	}
 	
-	public void initialiseParameters(Ball ball, ArrayList<Player> ar_player) {
+	public void initialiseParameters(Ball ball, ArrayList<Player> ar_player, Team teamHome, Team teamVisitor) {
 		_ball = ball;
 		_ar_player = ar_player;
+		_teamHome = teamHome;
+		_teamVisitor = teamVisitor;
 	}
 	
 	public void paint(Graphics g) {
 		initialiseField(g);
 		drawPlayers(g);
 		drawBall(g);
+		drawScores(g);
 	}
 
 	private void drawBall(Graphics g) {
@@ -49,6 +54,13 @@ public class FieldPanel extends JPanel {
 			g.setColor(player.getColor());
 			g.fillRect(xPosition, yPosition, player.getSize(), player.getSize()); 
 		}
+	}
+	
+	private void drawScores(Graphics g){
+		g.setColor(_teamHome.getColor());
+		g.drawString(new Integer(_teamHome.getScore()).toString(), (_xSize/2)-20, 20);
+		g.setColor(_teamVisitor.getColor());
+		g.drawString(new Integer(_teamVisitor.getScore()).toString(), (_xSize/2)+20, 20);
 	}
 
 	private void initialiseField(Graphics g) {

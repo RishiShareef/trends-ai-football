@@ -12,14 +12,32 @@ public class Match extends Thread {
 	private Team _teamHome, _teamVisitor;
 	private Ball _ball;
 	private FieldPanel _fieldPanel;
+	private Player _playerWithBall;
 
 	public Match(Team teamHome, Team teamVisitor, FieldPanel fieldPanel){
+		
+		ArrayList<Double> strategies = new ArrayList<Double>();
+		for(int i = 0; i<11; i++){
+			if(i<9)
+				strategies.add(1.0);
+			else
+				strategies.add(0.0);
+		}
+			
+		
+		
 		_fieldPanel = fieldPanel;
 		_teamHome = teamHome;
 		_teamHome.beginMatch(this, Color.BLUE, Location.HOME);
 		_teamVisitor = teamVisitor;
 		_teamVisitor.beginMatch(this, Color.RED, Location.VISITOR);
-		_ball = new Ball(fieldPanel.getWidth()/2,fieldPanel.getHeight()/2);
+		_teamHome.setOpponent(_teamVisitor);
+		_teamVisitor.setOpponent(_teamHome);
+		_teamHome.giveStrategy(strategies);
+		_teamVisitor.giveStrategy(strategies);
+		_playerWithBall = chooseRandomPlayer(null);
+		_ball = new Ball(_playerWithBall);
+		_playerWithBall.getBall();
 	}
 	
 	public void run() {
@@ -34,9 +52,9 @@ public class Match extends Thread {
 //				double minDistance =
 			}
 			
-			for(Player player : getAllPlayers()) {
-				player.acts(_ball);
-			}
+			
+			_playerWithBall.acts(_ball);
+			
 			for(Player player : getAllPlayers()) {
 				player.interceptBall(_ball);
 			}
@@ -45,7 +63,7 @@ public class Match extends Thread {
 			checkGoal();
 			_fieldPanel.repaint();
 			try {
-				sleep(100);
+				sleep(300);
 			} catch (Exception e) {e.printStackTrace();}
 		}
 	}
@@ -67,6 +85,35 @@ public class Match extends Thread {
 		}
 	}
 	
+	public void giveBallToNewPlayer(Team scorer){
+		Player newOwner;
+		if(scorer.equals(_teamHome)){
+			newOwner = chooseRandomPlayer(_teamVisitor);
+			_ball.setOwner(newOwner);
+			setNewBallOwner(newOwner);
+		}
+		if(scorer.equals(_teamVisitor)){
+			newOwner = chooseRandomPlayer(_teamHome);
+			_ball.setOwner(newOwner);
+			setNewBallOwner(newOwner);
+		}
+				
+	}
+	
+	private Player chooseRandomPlayer(Team team){
+		ArrayList<Player> players;
+		if(team==null)
+			players = getAllPlayers();
+		else
+			players = team.getPlayers();
+		Random random = new Random();
+		return players.get(random.nextInt(players.size()));
+	}
+	
 	public Ball getBall(){return _ball;}
+	
+	public void setNewBallOwner(Player player){
+		_playerWithBall=player;
+		player.getBall();}
 	
 }

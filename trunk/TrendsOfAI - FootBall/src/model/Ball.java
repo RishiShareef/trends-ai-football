@@ -3,6 +3,7 @@ package model;
 import java.awt.Dimension;
 
 public class Ball {
+	private Player _owner;
 	private int _xPosition;
 	private int _yPosition;
 	private int _xOldPosition;
@@ -11,11 +12,11 @@ public class Ball {
 	private int _xDirection;
 	private int _yDirection;
 	
-	public Ball( int xPosition, int yPosition) {
-		_xPosition = xPosition;
-		_yPosition = yPosition;
-		_xOldPosition = xPosition;
-		_yOldPosition = yPosition;
+	public Ball( Player player ) {
+		this._owner = player;
+		giveBallToPlayer(player);
+		this._xOldPosition = player.getXPosition();
+		this._yOldPosition = player.getYPosition();
 		_radius = 7;
 		_xDirection = 0;
 		_yDirection = 0;
@@ -35,10 +36,14 @@ public class Ball {
 		_yDirection = 0;
 	}
 	
-	public void setPosition(int xPosition, int yPosition) {
-		_xPosition = xPosition;
-		_yPosition = yPosition;
+	public void setOwner(Player player){
+		this._owner=player; 
+		giveBallToPlayer(player);
 	}
+	
+	public void setPosition(int xPosition, int yPosition){_xPosition = xPosition; _yPosition = yPosition;}
+	public void giveBallToPlayer(Player player){_xPosition=player.getXPosition(); _yPosition=player.getYPosition();}
+	
 	public int getRadius() {return _radius;}
 	public int getXPosition() {return _xPosition;}
 	public int getYPosition() {return _yPosition;}
