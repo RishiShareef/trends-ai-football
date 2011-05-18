@@ -13,10 +13,10 @@ public class Ball {
 	private int _yDirection;
 	
 	public Ball( Player player ) {
-		this._owner = player;
+		_owner = player;
 		giveBallToPlayer(player);
-		this._xOldPosition = player.getXPosition();
-		this._yOldPosition = player.getYPosition();
+		_xOldPosition = player.getXPosition();
+		_yOldPosition = player.getYPosition();
 		_radius = 7;
 		_xDirection = 0;
 		_yDirection = 0;
@@ -37,12 +37,12 @@ public class Ball {
 	}
 	
 	public void setOwner(Player player){
-		this._owner=player; 
+		_owner = player; 
 		giveBallToPlayer(player);
 	}
 	
-	public void setPosition(int xPosition, int yPosition){_xPosition = xPosition; _yPosition = yPosition;}
-	public void giveBallToPlayer(Player player){_xPosition=player.getXPosition(); _yPosition=player.getYPosition();}
+	public void setPosition(int xPosition, int yPosition){_xOldPosition = _xPosition; _yOldPosition = _yPosition; _xPosition = xPosition; _yPosition = yPosition;}
+	public void giveBallToPlayer(Player player){setPosition(player.getXPosition(),player.getYPosition());}
 	
 	public int getRadius() {return _radius;}
 	public int getXPosition() {return _xPosition;}
