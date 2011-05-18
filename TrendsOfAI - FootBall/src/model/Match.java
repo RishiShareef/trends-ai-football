@@ -23,8 +23,6 @@ public class Match extends Thread {
 			else
 				strategies.add(0.0);
 		}
-			
-		
 		
 		_fieldPanel = fieldPanel;
 		_teamHome = teamHome;
@@ -42,13 +40,13 @@ public class Match extends Thread {
 	
 	public void run() {
 		int time = 0;
-		boolean intercetion = false;
+		boolean interception = false;
 		while(time < 1000) {
 			time++;
 			System.out.println("Match::run >> minute " + time);
 //			System.out.println("ball position " + _ball.getPosition());
 			
-			if(!intercetion) {
+			if(!interception) {
 //				double minDistance =
 			}
 			

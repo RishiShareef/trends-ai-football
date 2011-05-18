@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -44,6 +46,9 @@ public class FieldPanel extends JPanel {
 		int yPosition = _ball.getYPosition() - _ball.getRadius();
 		int diameter = 2*_ball.getRadius();
 		g.setColor(Color.WHITE);
+		System.out.println("old x = "+_ball.getXOldPosition());
+		System.out.println("new x = "+_ball.getXPosition());
+		g.drawLine(_ball.getXOldPosition(), _ball.getYOldPosition(), _ball.getXPosition(), _ball.getYPosition());
 		g.fillArc(xPosition, yPosition, diameter, diameter, 0, 360);
 	}
 
@@ -58,7 +63,11 @@ public class FieldPanel extends JPanel {
 	
 	private void drawScores(Graphics g){
 		g.setColor(_teamHome.getColor());
-		g.drawString(new Integer(_teamHome.getScore()).toString(), (_xSize/2)-20, 20);
+		Font font = new Font("Arial", Font.BOLD, 14);
+		g.setFont(font);
+		FontMetrics fontMetrics = g.getFontMetrics();
+		String homeScore = new Integer(_teamHome.getScore()).toString();
+		g.drawString(homeScore, (_xSize/2)-20-fontMetrics.stringWidth(homeScore), 20);
 		g.setColor(_teamVisitor.getColor());
 		g.drawString(new Integer(_teamVisitor.getScore()).toString(), (_xSize/2)+20, 20);
 	}
