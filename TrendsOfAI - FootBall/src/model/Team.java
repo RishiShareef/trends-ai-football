@@ -17,15 +17,22 @@ public class Team {
 	private Location _location;
 	private Team _opponent;
 	private int _score;
+	private static final double _probaShoot = 0.3;
 	
 	public Team(Dimension fieldDimension) {
 		/*
 		 * Constructs a random team
 		 */
 		_score = 0;
-		_ar_player = new ArrayList<Player>();
 		_fieldDimension = fieldDimension;
-		//_teamColor = generateRandomColor();
+	}
+	
+	public Team(Dimension fieldDimension, boolean randomPlayers) {
+		/*
+		 * Constructs a random team
+		 */
+		this(fieldDimension);
+		_ar_player = new ArrayList<Player>();
 		generateRandomPlayers();
 	}
 	
@@ -33,10 +40,16 @@ public class Team {
 		/*
 		 * Constructs a team with ar_player players
 		 */
-		_score = 0;
-		_fieldDimension = fieldDimension;
-		//_teamColor = generateRandomColor();
+		this(fieldDimension);
 		_ar_player = ar_player;
+	}
+	
+	public Team(Dimension fieldDimension, int [] ar_playerStrategy) {
+		this(fieldDimension);
+		_ar_player = new ArrayList<Player>();
+		for(int i = 0; i<_numberPlayers; i++) {
+			_ar_player.add(new Player(this,0,0, ar_playerStrategy[i], i));
+		}
 	}
 	
 	public void beginMatch(Match match, Color color, Location location) {
@@ -58,19 +71,23 @@ public class Team {
 	
 	private void generateRandomPlayers() {
 		Random random = new Random();
-		System.out.println(random);
-		for(int i = 0; i<_numberPlayers-1; i++) {
-			double probaPass = random.nextDouble();
-			double [] strategy = {probaPass, 1-probaPass};
-			_ar_player.add(new Player(this, random.nextInt(_fieldDimension.width), random.nextInt(_fieldDimension.height), strategy));
+		int randomPass;
+		do {
+			randomPass = random.nextInt(_numberPlayers);
 		}
-		_ar_player.add(new Keeper(this, 10, _fieldDimension.height/2));
-	}
-	
-	public void giveStrategy(ArrayList<Double> tactics){
-		for(int i=0;i<_ar_player.size();i++)
-			_ar_player.get(i).setTactic(tactics.get(i));
-		
+		while(randomPass == 1);
+		_ar_player.add(new Keeper(this, 10, _fieldDimension.height/2, randomPass));
+		for(int i = 0; i<_numberPlayers-1; i++) {
+			int position = i+2;
+			do {
+				randomPass = random.nextInt(_numberPlayers);
+				if(random.nextDouble() < _probaShoot) {
+					randomPass = -1;
+				}
+			}
+			while(randomPass == position);
+			_ar_player.add(new Player(this, random.nextInt(_fieldDimension.width), random.nextInt(_fieldDimension.height), randomPass, position));
+		}
 	}
 	
 	public void score(){
@@ -82,8 +99,6 @@ public class Team {
 		Random ran = new Random();
 		Player newOwner = _ar_player.get(ran.nextInt(_ar_player.size()));
 		ball.setOwner(newOwner);
-		newOwner.getBall();
-		_match.setNewBallOwner(newOwner);
 	}
 	
 	private void replacePlayerHOME(){
@@ -135,4 +150,16 @@ public class Team {
 	public int getYFieldDimension() {return _fieldDimension.height;}
 	public void setOpponent(Team opponent){_opponent=opponent;}
 	public Team getOpponent(){return _opponent;}
+	public void printTeam() {
+		System.out.println("Team::printTeam >> ");
+		for(Player player : _ar_player) {
+			player.print();
+		}
+	}
+
+	public Player getRandomPlayer() {
+		Random random = new Random();
+		return _ar_player.get(random.nextInt(_ar_player.size()));
+	}
+	public Player getPlayer(int i) {return _ar_player.get(i);}
 }

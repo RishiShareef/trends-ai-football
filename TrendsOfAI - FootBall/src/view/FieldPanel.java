@@ -46,8 +46,6 @@ public class FieldPanel extends JPanel {
 		int yPosition = _ball.getYPosition() - _ball.getRadius();
 		int diameter = 2*_ball.getRadius();
 		g.setColor(Color.WHITE);
-		System.out.println("old x = "+_ball.getXOldPosition());
-		System.out.println("new x = "+_ball.getXPosition());
 		g.drawLine(_ball.getXOldPosition(), _ball.getYOldPosition(), _ball.getXPosition(), _ball.getYPosition());
 		g.fillArc(xPosition, yPosition, diameter, diameter, 0, 360);
 	}
@@ -57,7 +55,8 @@ public class FieldPanel extends JPanel {
 			int xPosition = player.getXPosition() - (player.getSize()/2);
 			int yPosition = player.getYPosition() - (player.getSize()/2);
 			g.setColor(player.getColor());
-			g.fillRect(xPosition, yPosition, player.getSize(), player.getSize()); 
+			g.fillRect(xPosition, yPosition, player.getSize(), player.getSize());
+			g.drawString(((Integer)player.getPosition()).toString(), xPosition, yPosition + 2*player.getSize());
 		}
 	}
 	
