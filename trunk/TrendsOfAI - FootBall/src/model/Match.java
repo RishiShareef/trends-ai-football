@@ -12,18 +12,9 @@ public class Match extends Thread {
 	private Team _teamHome, _teamVisitor;
 	private Ball _ball;
 	private FieldPanel _fieldPanel;
-	private Player _playerWithBall;
 
 	public Match(Team teamHome, Team teamVisitor, FieldPanel fieldPanel){
-		
-		ArrayList<Double> strategies = new ArrayList<Double>();
-		for(int i = 0; i<11; i++){
-			if(i<9)
-				strategies.add(1.0);
-			else
-				strategies.add(0.0);
-		}
-		
+				
 		_fieldPanel = fieldPanel;
 		_teamHome = teamHome;
 		_teamHome.beginMatch(this, Color.BLUE, Location.HOME);
@@ -31,33 +22,23 @@ public class Match extends Thread {
 		_teamVisitor.beginMatch(this, Color.RED, Location.VISITOR);
 		_teamHome.setOpponent(_teamVisitor);
 		_teamVisitor.setOpponent(_teamHome);
-		_teamHome.giveStrategy(strategies);
-		_teamVisitor.giveStrategy(strategies);
-		_playerWithBall = chooseRandomPlayer(null);
-		_ball = new Ball(_playerWithBall);
-		_playerWithBall.getBall();
+		_ball = new Ball(_teamHome.getRandomPlayer());
 	}
 	
 	public void run() {
 		int time = 0;
-		boolean interception = false;
 		while(time < 1000) {
 			time++;
-			System.out.println("Match::run >> minute " + time);
-//			System.out.println("ball position " + _ball.getPosition());
+//			System.out.println("Match::run >> minute " + time);			
 			
-			if(!interception) {
-//				double minDistance =
+			_ball.acts();
+			
+			interception : for(Player player : getAllPlayers()) {
+				if(player.interceptBall(_ball))
+					break interception;
 			}
-			
-			
-			_playerWithBall.acts(_ball);
-			
-			for(Player player : getAllPlayers()) {
-				player.interceptBall(_ball);
-			}
-			
 			_ball.updatePosition();
+			
 			checkGoal();
 			_fieldPanel.repaint();
 			try {
@@ -88,12 +69,10 @@ public class Match extends Thread {
 		if(scorer.equals(_teamHome)){
 			newOwner = chooseRandomPlayer(_teamVisitor);
 			_ball.setOwner(newOwner);
-			setNewBallOwner(newOwner);
 		}
 		if(scorer.equals(_teamVisitor)){
 			newOwner = chooseRandomPlayer(_teamHome);
 			_ball.setOwner(newOwner);
-			setNewBallOwner(newOwner);
 		}
 				
 	}
@@ -109,9 +88,5 @@ public class Match extends Thread {
 	}
 	
 	public Ball getBall(){return _ball;}
-	
-	public void setNewBallOwner(Player player){
-		_playerWithBall=player;
-		player.getBall();}
 	
 }

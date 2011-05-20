@@ -25,8 +25,10 @@ public class MainFrame extends JFrame {
 	}
 	
 	private void run(){
-		Team teamHome = new Team(_fieldPanel.getSize());
-		Team teamVisitor = new Team(_fieldPanel.getSize());
+		Team teamHome = new Team(_fieldPanel.getSize(), true);
+		Team teamVisitor = new Team(_fieldPanel.getSize(), true);
+		teamHome.printTeam();
+		teamVisitor.printTeam();
 		Match match = new Match(teamHome, teamVisitor, _fieldPanel);
 		_fieldPanel.initialiseParameters(match.getBall(), match.getAllPlayers(),teamHome,teamVisitor);
 		

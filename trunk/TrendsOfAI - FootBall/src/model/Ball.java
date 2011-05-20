@@ -9,40 +9,35 @@ public class Ball {
 	private int _xOldPosition;
 	private int _yOldPosition;
 	private int _radius;
-	private int _xDirection;
-	private int _yDirection;
 	
-	public Ball( Player player ) {
+	public Ball(Player player) {
 		_owner = player;
-		giveBallToPlayer(player);
 		_xOldPosition = player.getXPosition();
 		_yOldPosition = player.getYPosition();
 		_radius = 7;
-		_xDirection = 0;
-		_yDirection = 0;
 	}
 	
-	public void shoot(int xDirection, int yDirection) {
-		_xDirection += xDirection;
-		_yDirection += yDirection;
+	public void acts() {
+		/*
+		 * Ask the owner to shoot
+		 */
+		_owner.acts(this);
 	}
 
 	public void updatePosition() {
-		_xOldPosition = _xPosition;
-		_yOldPosition = _yPosition;
-		_xPosition += _xDirection;
-		_yPosition += _yDirection;
-		_xDirection = 0;
-		_yDirection = 0;
+		setPosition(_owner.getXPosition(), _owner.getYPosition());
 	}
 	
 	public void setOwner(Player player){
-		_owner = player; 
-		giveBallToPlayer(player);
+		_owner = player;
 	}
 	
-	public void setPosition(int xPosition, int yPosition){_xOldPosition = _xPosition; _yOldPosition = _yPosition; _xPosition = xPosition; _yPosition = yPosition;}
-	public void giveBallToPlayer(Player player){setPosition(player.getXPosition(),player.getYPosition());}
+	public void setPosition(int xPosition, int yPosition){
+		_xOldPosition = _xPosition;
+		_yOldPosition = _yPosition;
+		_xPosition = xPosition;
+		_yPosition = yPosition;
+	}
 	
 	public int getRadius() {return _radius;}
 	public int getXPosition() {return _xPosition;}
@@ -50,4 +45,13 @@ public class Ball {
 	public int getXOldPosition() {return _xOldPosition;}
 	public int getYOldPosition() {return _yOldPosition;}
 	public Dimension getPosition() {return new Dimension(_xPosition, _yPosition);}
+
+	public void print() {
+		System.out.println("Ball::print >> ");
+		System.out.println("\towner = " + _owner.getPosition());
+	}
+
+	public boolean isOwner(Player player) {
+		return (player == _owner);
+	}
 }
