@@ -182,7 +182,7 @@ public class Team {
 	public void printTeam() {
 		System.out.println("Team::printTeam >> ");
 		for(Player player : _ar_player) {
-			player.print();
+			//player.print();
 		}
 	}
 
