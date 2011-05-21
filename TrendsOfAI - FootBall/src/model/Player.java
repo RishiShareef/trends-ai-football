@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Random;
 
-
 public class Player implements BallActor {
 
 	protected double _visibility = 70; // max distance to intercept ball
@@ -52,8 +51,8 @@ public class Player implements BallActor {
 		if (distance > _visibility)
 			return false;
 		double proba = 1 / (distance / 50 + 1);
-		System.out.println("Player::interceptBall >> player " + _playerPosition
-				+ "; proba = " + proba);
+//		System.out.println("Player::interceptBall >> player " + _playerPosition
+//				+ "; proba = " + proba);
 		// proba = 0;
 		Random random = new Random();
 		if (random.nextDouble() < proba) {
