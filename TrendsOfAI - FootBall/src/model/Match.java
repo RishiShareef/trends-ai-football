@@ -77,6 +77,7 @@ public class Match {
 			_ball.setDesiredBallActor(_teamHome.getRandomPlayer());
 		}
 		_ball.updatePosition();
+		_ball.acts();
 	}
 	
 	public Ball getBall(){return _ball;}
