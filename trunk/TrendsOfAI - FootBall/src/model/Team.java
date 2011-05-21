@@ -10,6 +10,7 @@ import view.FieldPanel;
 public class Team {
 
 	private ArrayList<Player> _ar_player;
+	private Goal _goal; // The goal is the opponent's goal, that is the goal you want to shoot into ;)
 	private final static int _numberPlayers = 11;
 	private Dimension _fieldDimension;
 	private Match _match;
@@ -55,10 +56,14 @@ public class Team {
 	public void beginMatch(Match match, Color color, Location location) {
 		_match = match;
 		_location = location;
-		if(location==Location.HOME)
+		if(location==Location.HOME) {
 			replacePlayerHOME();
-		else if(location==Location.VISITOR)
+			_goal = new Goal(_fieldDimension.width, _fieldDimension.height/2, location);
+		}
+		else if(location==Location.VISITOR) {
 			replacePlayerVISITOR();
+			_goal = new Goal(0, _fieldDimension.height/2, location);
+		}
 		for(Player player : _ar_player) {
 			player.beginMatch(color);
 		}
@@ -92,14 +97,13 @@ public class Team {
 	
 	public void score(){
 		_score++;
-		_match.giveBallToNewPlayer(this);
 	}
 	
-	public void passToRandomPlayer(Ball ball){
-		Random ran = new Random();
-		Player newOwner = _ar_player.get(ran.nextInt(_ar_player.size()));
-		ball.setOwner(newOwner);
-	}
+//	public void passToRandomPlayer(Ball ball){
+//		Random ran = new Random();
+//		Player newOwner = _ar_player.get(ran.nextInt(_ar_player.size()));
+//		ball.setOwner(newOwner);
+//	}
 	
 	private void replacePlayerHOME(){
 		_ar_player.get(0).setPosition(_fieldDimension.width/20, _fieldDimension.height/2);
@@ -137,13 +141,7 @@ public class Team {
 	public ArrayList<Player> getPlayers(){return new ArrayList<Player>(_ar_player);}
 	public Match getMatch(){return _match;}
 	public Location getLocation() {return _location;}
-	public Dimension getGoal() {
-		switch(_location) {
-		case HOME : return new Dimension(_fieldDimension.width, _fieldDimension.height/2);
-		case VISITOR : return new Dimension(0, _fieldDimension.height/2);
-		default : return null;
-		}
-	}
+	public Goal getGoal() {return _goal;}
 	public Color getColor(){return _teamColor;}
 	public int getScore(){return _score;}
 	public int getXFieldDimension() {return _fieldDimension.width;}

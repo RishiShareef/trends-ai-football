@@ -22,7 +22,7 @@ public class Match extends Thread {
 		_teamVisitor.beginMatch(this, Color.RED, Location.VISITOR);
 		_teamHome.setOpponent(_teamVisitor);
 		_teamVisitor.setOpponent(_teamHome);
-		_ball = new Ball(_teamHome.getRandomPlayer());
+		_ball = new Ball(_teamHome.getRandomPlayer(), this);
 	}
 	
 	public void run() {
@@ -39,10 +39,9 @@ public class Match extends Thread {
 			}
 			_ball.updatePosition();
 			
-			checkGoal();
 			_fieldPanel.repaint();
 			try {
-				sleep(300);
+				sleep(1000);
 			} catch (Exception e) {e.printStackTrace();}
 		}
 	}
@@ -53,39 +52,29 @@ public class Match extends Thread {
 		return ar_allPlayers;
 	}
 	
-	public void checkGoal() {
-		if(_ball.getXPosition() <= 0 && _ball.getYPosition() <= _fieldPanel.getHeight()/2 + 37 && _ball.getYPosition() >= _fieldPanel.getHeight()/2 - 37) {
-			_ball.setPosition(_fieldPanel.getWidth()/2, _fieldPanel.getHeight()/2);
-			System.out.println("Visitor scored !");
+	public void setGoal(Location location) {
+		if(location == Location.HOME) {
+			System.out.println("HOME SCORED !!!");
+			_teamHome.score();
+			_ball.setBallActor(_teamVisitor.getRandomPlayer());
 		}
-		else if(_ball.getXPosition() >= _fieldPanel.getWidth() && _ball.getYPosition() <= _fieldPanel.getHeight()/2 + 37 && _ball.getYPosition() >= _fieldPanel.getHeight()/2 - 37) {
-			_ball.setPosition(_fieldPanel.getWidth()/2, _fieldPanel.getHeight()/2);
-			System.out.println("Home scored !");
+		else if(location == Location.VISITOR) {
+			System.out.println("VISITOR SCORED !!!");
+			_teamVisitor.score();
+			_ball.setBallActor(_teamHome.getRandomPlayer());
 		}
 	}
 	
-	public void giveBallToNewPlayer(Team scorer){
-		Player newOwner;
-		if(scorer.equals(_teamHome)){
-			newOwner = chooseRandomPlayer(_teamVisitor);
-			_ball.setOwner(newOwner);
-		}
-		if(scorer.equals(_teamVisitor)){
-			newOwner = chooseRandomPlayer(_teamHome);
-			_ball.setOwner(newOwner);
-		}
-				
-	}
-	
-	private Player chooseRandomPlayer(Team team){
-		ArrayList<Player> players;
-		if(team==null)
-			players = getAllPlayers();
-		else
-			players = team.getPlayers();
-		Random random = new Random();
-		return players.get(random.nextInt(players.size()));
-	}
+//	public void checkGoal() {
+//		if(_ball.getXPosition() <= 0 && _ball.getYPosition() <= _fieldPanel.getHeight()/2 + 37 && _ball.getYPosition() >= _fieldPanel.getHeight()/2 - 37) {
+//			_ball.setPosition(_fieldPanel.getWidth()/2, _fieldPanel.getHeight()/2);
+//			System.out.println("Visitor scored !");
+//		}
+//		else if(_ball.getXPosition() >= _fieldPanel.getWidth() && _ball.getYPosition() <= _fieldPanel.getHeight()/2 + 37 && _ball.getYPosition() >= _fieldPanel.getHeight()/2 - 37) {
+//			_ball.setPosition(_fieldPanel.getWidth()/2, _fieldPanel.getHeight()/2);
+//			System.out.println("Home scored !");
+//		}
+//	}
 	
 	public Ball getBall(){return _ball;}
 	

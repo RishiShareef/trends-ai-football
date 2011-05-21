@@ -15,5 +15,24 @@ public class Calculate {
 		double denominator = Math.sqrt(a*a+b*b);
 		return numerator/denominator;
 	}
+
+	public static double calculateSegmentRightPointDistance(int xPlayer, int yPlayer, int xBallOld, int yBallOld, int xBallNew,	int yBallNew) {
+		/*
+		 * Returns distance to a right segment
+		 * a = distance(ballOld, ballNew)
+		 * b = distance(ballOld, playerPosition)
+		 * c = distance(ballNew, playerPosition)
+		 */
+		double a = calculatePointDistance(xBallOld, yBallOld, xBallNew, yBallNew);
+		double b = calculatePointDistance(xBallOld, yBallOld, xPlayer, yPlayer);
+		double c = calculatePointDistance(xBallNew, yBallNew, xPlayer, yPlayer);
+		
+		if(b*b > a*a + c*c)
+			return c;
+		else if(c*c > a*a + b*b)
+			return b;
+		else
+			return calculateRightPointDistance(xPlayer, yPlayer, xBallOld, yBallOld, xBallNew, yBallNew);
+	}
 	
 }
