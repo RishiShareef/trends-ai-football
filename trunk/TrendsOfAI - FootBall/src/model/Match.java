@@ -1,5 +1,7 @@
 package model;
 
+import genetic.Winner;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -7,7 +9,7 @@ import java.util.Random;
 
 import view.FieldPanel;
 
-public class Match extends Thread {
+public class Match {
 	
 	private Team _teamHome, _teamVisitor;
 	private Ball _ball;
@@ -25,7 +27,7 @@ public class Match extends Thread {
 		_ball = new Ball(_teamHome.getRandomPlayer(), this);
 	}
 	
-	public void run() {
+	public Winner run() {
 		int time = 0;
 		while(time < 1000) {
 			time++;
@@ -44,9 +46,15 @@ public class Match extends Thread {
 			
 			_fieldPanel.repaint();
 			try {
-				sleep(1000);
+				Thread.sleep(1000);
 			} catch (Exception e) {e.printStackTrace();}
 		}
+		
+		if(_teamHome.getScore() > _teamVisitor.getScore())
+			return Winner.HOME;
+		else if(_teamHome.getScore() < _teamVisitor.getScore())
+			return Winner.VISITOR;
+		return Winner.DRAW;
 	}
 	
 	public ArrayList<Player> getAllPlayers(){

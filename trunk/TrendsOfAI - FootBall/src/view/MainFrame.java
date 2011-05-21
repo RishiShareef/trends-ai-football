@@ -32,6 +32,6 @@ public class MainFrame extends JFrame {
 		Match match = new Match(teamHome, teamVisitor, _fieldPanel);
 		_fieldPanel.initialiseParameters(match.getBall(), match.getAllPlayers(),teamHome,teamVisitor);
 		
-		match.start();
+		match.run();
 	}
 }

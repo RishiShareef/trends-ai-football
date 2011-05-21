@@ -33,9 +33,11 @@ public class Calculate {
 		double c2 = calculatePointDistanceSquare(xBallNew, yBallNew, xPlayer, yPlayer);
 		
 		if(b2 > a2 + c2)
-			return Math.sqrt(c2);
+			return Integer.MAX_VALUE;
+//			return Math.sqrt(c2);
 		else if(c2 > a2 + b2)
-			return Math.sqrt(b2);
+			return Integer.MAX_VALUE;
+//			return Math.sqrt(b2);
 		else
 			return calculateRightPointDistance(xPlayer, yPlayer, xBallOld, yBallOld, xBallNew, yBallNew);
 	}
