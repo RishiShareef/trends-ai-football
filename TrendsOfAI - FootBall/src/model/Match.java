@@ -44,12 +44,12 @@ public class Match {
 			
 			_ball.updatePosition();
 			
-			if(_fieldPanel!=null)
+			if(_fieldPanel!=null) {
 				_fieldPanel.repaint();
-			try {
-				if(_fieldPanel!=null)
+				try {
 					Thread.sleep(1000);
-			} catch (Exception e) {e.printStackTrace();}
+				} catch (Exception e) {e.printStackTrace();}
+			}
 		}
 		
 		if(_teamHome.getScore() > _teamVisitor.getScore())
