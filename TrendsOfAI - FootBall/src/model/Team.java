@@ -112,31 +112,56 @@ public class Team {
 //	}
 	
 	private void replacePlayerHOME(){
+		
+//		_ar_player.get(0).setPosition(1*_fieldDimension.width/20, _fieldDimension.height/2);
+//		_ar_player.get(1).setPosition(5*_fieldDimension.width/20, _fieldDimension.height/8);
+//		_ar_player.get(2).setPosition(3*_fieldDimension.width/20, 3*_fieldDimension.height/8);
+//		_ar_player.get(3).setPosition(3*_fieldDimension.width/20, 5*_fieldDimension.height/8);
+//		_ar_player.get(4).setPosition(5*_fieldDimension.width/20, 7*_fieldDimension.height/8);
+//		_ar_player.get(5).setPosition(12*_fieldDimension.width/20, _fieldDimension.height/8);
+//		_ar_player.get(6).setPosition(9*_fieldDimension.width/20, 3*_fieldDimension.height/8);
+//		_ar_player.get(7).setPosition(9*_fieldDimension.width/20, 5*_fieldDimension.height/8);
+//		_ar_player.get(8).setPosition(12*_fieldDimension.width/20, 7*_fieldDimension.height/8);
+//		_ar_player.get(9).setPosition(15*_fieldDimension.width/20, _fieldDimension.height/4);
+//		_ar_player.get(10).setPosition(15*_fieldDimension.width/20, 3*_fieldDimension.height/4);
+		
 		_ar_player.get(0).setPosition(_fieldDimension.width/20, _fieldDimension.height/2);
-		_ar_player.get(1).setPosition(5*_fieldDimension.width/20, _fieldDimension.height/8);
-		_ar_player.get(2).setPosition(3*_fieldDimension.width/20, 3*_fieldDimension.height/8);
-		_ar_player.get(3).setPosition(3*_fieldDimension.width/20, 5*_fieldDimension.height/8);
-		_ar_player.get(4).setPosition(5*_fieldDimension.width/20, 7*_fieldDimension.height/8);
-		_ar_player.get(5).setPosition(12*_fieldDimension.width/20, _fieldDimension.height/8);
-		_ar_player.get(6).setPosition(9*_fieldDimension.width/20, 3*_fieldDimension.height/8);
-		_ar_player.get(7).setPosition(9*_fieldDimension.width/20, 5*_fieldDimension.height/8);
-		_ar_player.get(8).setPosition(12*_fieldDimension.width/20, 7*_fieldDimension.height/8);
-		_ar_player.get(9).setPosition(15*_fieldDimension.width/20, _fieldDimension.height/4);
-		_ar_player.get(10).setPosition(15*_fieldDimension.width/20, 3*_fieldDimension.height/4);
+		_ar_player.get(1).setPosition(4*_fieldDimension.width/20, 2*_fieldDimension.height/8);
+		_ar_player.get(2).setPosition(4*_fieldDimension.width/20, 6*_fieldDimension.height/8);
+		_ar_player.get(3).setPosition(9*_fieldDimension.width/20, 1*_fieldDimension.height/6);
+		_ar_player.get(4).setPosition(9*_fieldDimension.width/20, 2*_fieldDimension.height/6);
+		_ar_player.get(5).setPosition(9*_fieldDimension.width/20, 3*_fieldDimension.height/6);
+		_ar_player.get(6).setPosition(9*_fieldDimension.width/20, 4*_fieldDimension.height/6);
+		_ar_player.get(7).setPosition(9*_fieldDimension.width/20, 5*_fieldDimension.height/6);
+		_ar_player.get(8).setPosition(14*_fieldDimension.width/20, _fieldDimension.height/4);
+		_ar_player.get(9).setPosition(14*_fieldDimension.width/20, 2*_fieldDimension.height/4);
+		_ar_player.get(10).setPosition(14*_fieldDimension.width/20, 3*_fieldDimension.height/4);
 	}
 	
 	private void replacePlayerVISITOR(){
+//		_ar_player.get(0).setPosition(19*_fieldDimension.width/20, _fieldDimension.height/2);
+//		_ar_player.get(1).setPosition(15*_fieldDimension.width/20, _fieldDimension.height/8);
+//		_ar_player.get(2).setPosition(17*_fieldDimension.width/20, 3*_fieldDimension.height/8);
+//		_ar_player.get(3).setPosition(17*_fieldDimension.width/20, 5*_fieldDimension.height/8);
+//		_ar_player.get(4).setPosition(15*_fieldDimension.width/20, 7*_fieldDimension.height/8);
+//		_ar_player.get(5).setPosition(8*_fieldDimension.width/20, _fieldDimension.height/8);
+//		_ar_player.get(6).setPosition(11*_fieldDimension.width/20, 3*_fieldDimension.height/8);
+//		_ar_player.get(7).setPosition(11*_fieldDimension.width/20, 5*_fieldDimension.height/8);
+//		_ar_player.get(8).setPosition(8*_fieldDimension.width/20, 7*_fieldDimension.height/8);
+//		_ar_player.get(9).setPosition(5*_fieldDimension.width/20, _fieldDimension.height/4);
+//		_ar_player.get(10).setPosition(5*_fieldDimension.width/20, 3*_fieldDimension.height/4);
+		
 		_ar_player.get(0).setPosition(19*_fieldDimension.width/20, _fieldDimension.height/2);
-		_ar_player.get(1).setPosition(15*_fieldDimension.width/20, _fieldDimension.height/8);
-		_ar_player.get(2).setPosition(17*_fieldDimension.width/20, 3*_fieldDimension.height/8);
-		_ar_player.get(3).setPosition(17*_fieldDimension.width/20, 5*_fieldDimension.height/8);
-		_ar_player.get(4).setPosition(15*_fieldDimension.width/20, 7*_fieldDimension.height/8);
-		_ar_player.get(5).setPosition(8*_fieldDimension.width/20, _fieldDimension.height/8);
-		_ar_player.get(6).setPosition(11*_fieldDimension.width/20, 3*_fieldDimension.height/8);
-		_ar_player.get(7).setPosition(11*_fieldDimension.width/20, 5*_fieldDimension.height/8);
-		_ar_player.get(8).setPosition(8*_fieldDimension.width/20, 7*_fieldDimension.height/8);
-		_ar_player.get(9).setPosition(5*_fieldDimension.width/20, _fieldDimension.height/4);
-		_ar_player.get(10).setPosition(5*_fieldDimension.width/20, 3*_fieldDimension.height/4);
+		_ar_player.get(1).setPosition(16*_fieldDimension.width/20, 2*_fieldDimension.height/8);
+		_ar_player.get(2).setPosition(16*_fieldDimension.width/20, 6*_fieldDimension.height/8);
+		_ar_player.get(3).setPosition(11*_fieldDimension.width/20, 1*_fieldDimension.height/6);
+		_ar_player.get(4).setPosition(11*_fieldDimension.width/20, 2*_fieldDimension.height/6);
+		_ar_player.get(5).setPosition(11*_fieldDimension.width/20, 3*_fieldDimension.height/6);
+		_ar_player.get(6).setPosition(11*_fieldDimension.width/20, 4*_fieldDimension.height/6);
+		_ar_player.get(7).setPosition(11*_fieldDimension.width/20, 5*_fieldDimension.height/6);
+		_ar_player.get(8).setPosition(6*_fieldDimension.width/20, _fieldDimension.height/4);
+		_ar_player.get(9).setPosition(6*_fieldDimension.width/20, 2*_fieldDimension.height/4);
+		_ar_player.get(10).setPosition(6*_fieldDimension.width/20, 3*_fieldDimension.height/4);
 	}
 	
 	private Color generateRandomColor() {
