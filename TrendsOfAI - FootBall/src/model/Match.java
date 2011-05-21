@@ -67,12 +67,12 @@ public class Match {
 	
 	public void setGoal(Location location) {
 		if(location == Location.HOME) {
-			System.out.println("HOME SCORED !!!");
+//			System.out.println("Match::setGoal >> HOME SCORED !!!");
 			_teamHome.score();
 			_ball.setDesiredBallActor(_teamVisitor.getRandomPlayer());
 		}
 		else if(location == Location.VISITOR) {
-			System.out.println("VISITOR SCORED !!!");
+//			System.out.println("Match::setGoal >> VISITOR SCORED !!!");
 			_teamVisitor.score();
 			_ball.setDesiredBallActor(_teamHome.getRandomPlayer());
 		}
