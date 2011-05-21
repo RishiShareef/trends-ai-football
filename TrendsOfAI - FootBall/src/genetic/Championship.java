@@ -26,6 +26,7 @@ public class Championship {
 		for(int i=0;i<_ar_teams.size();i++){
 			for(int j=i+1;j<_ar_teams.size();j++){
 				match = new Match(_ar_teams.get(i),_ar_teams.get(j),null);
+				winner = match.run();
 			}
 		}
 		return scores;

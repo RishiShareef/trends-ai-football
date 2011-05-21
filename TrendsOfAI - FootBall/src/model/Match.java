@@ -47,7 +47,8 @@ public class Match {
 			if(_fieldPanel!=null)
 				_fieldPanel.repaint();
 			try {
-				//Thread.sleep(1000);
+				if(_fieldPanel!=null)
+					Thread.sleep(1000);
 			} catch (Exception e) {e.printStackTrace();}
 		}
 		
