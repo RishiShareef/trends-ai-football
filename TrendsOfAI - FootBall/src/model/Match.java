@@ -33,10 +33,13 @@ public class Match extends Thread {
 			
 			_ball.acts();
 			
-			interception : for(Player player : getAllPlayers()) {
-				if(player.interceptBall(_ball))
-					break interception;
+			if(_ball.getLocationTeamPlaying() == Location.HOME) {
+				_teamVisitor.interceptBall(_ball);
 			}
+			else {
+				_teamHome.interceptBall(_ball);
+			}
+			
 			_ball.updatePosition();
 			
 			_fieldPanel.repaint();

@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Dimension;
+
 public class Goal implements BallActor {
 
 	private int _xPosition;
@@ -20,5 +22,8 @@ public class Goal implements BallActor {
 	public int getXPosition() {return _xPosition;}
 	public int getYPosition() {return _yPosition;}
 	public int getPosition() {return _position;}
+	public Location getLocation() {return _location;}
+	
+	public Dimension getStrategyPosition() {return new Dimension(_xPosition, _yPosition);}
 
 }

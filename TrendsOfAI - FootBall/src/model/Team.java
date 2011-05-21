@@ -82,21 +82,29 @@ public class Team {
 		}
 		while(randomPass == 1);
 		_ar_player.add(new Keeper(this, 0, 0, randomPass));
-		for(int i = 0; i<_numberPlayers-1; i++) {
-			int position = i+1;
+		for(int i = 1; i<_numberPlayers; i++) {
 			do {
 				randomPass = random.nextInt(_numberPlayers);
 				if(random.nextDouble() < _probaShoot) {
 					randomPass = -1;
 				}
 			}
-			while(randomPass == position);
-			_ar_player.add(new Player(this, random.nextInt(_fieldDimension.width), random.nextInt(_fieldDimension.height), randomPass, position));
+			while(randomPass == i);
+			_ar_player.add(new Player(this, random.nextInt(_fieldDimension.width), random.nextInt(_fieldDimension.height), randomPass, i));
 		}
 	}
 	
 	public void score() {
 		_score++;
+	}
+	
+	public boolean interceptBall(Ball ball) {
+		for(Player player : _ar_player) {
+			if(player.interceptBall(ball))
+				return true;
+		}
+		
+		return false;
 	}
 	
 //	public void passToRandomPlayer(Ball ball){

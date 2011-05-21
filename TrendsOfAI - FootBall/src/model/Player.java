@@ -44,8 +44,9 @@ public class Player implements BallActor {
 			return false;
 		}
 		double distance = Calculate.calculateSegmentRightPointDistance(_xPosition, _yPosition, ball.getXOldPosition(), ball.getYOldPosition(), ball.getXPosition(), ball.getYPosition());
-		double proba = 1/((distance/10)+1);
+		double proba = 1/(distance/10+1);
 		System.out.println("Player::interceptBall >> player " + _playerPosition + "; proba = " + proba);
+		proba = 0;
 		Random random = new Random();
 		if(random.nextDouble() < proba) {
 			ball.setBallIntercepted(this);
@@ -72,5 +73,15 @@ public class Player implements BallActor {
 
 	public int getPosition() {
 		return _playerPosition;
+	}
+	
+	public Location getLocation() {return _team.getLocation();}
+	public Dimension getStrategyPosition() {
+		if(_pass == -1) {
+			return new Dimension(_team.getGoal().getXPosition(),_team.getGoal().getYPosition());
+		}
+		else {
+			return new Dimension(_team.getPlayer(_pass).getXPosition(), _team.getPlayer(_pass).getYPosition());
+		}
 	}
 }

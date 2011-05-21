@@ -43,11 +43,18 @@ public class FieldPanel extends JPanel {
 	}
 
 	private void drawBall(Graphics g) {
+		// Draw player strategy
+		g.setColor(new Color(255,0,0));
+		g.drawLine(_ball.getXOldPosition(), _ball.getYOldPosition(), _ball.getOldBallActor().getStrategyPosition().width, _ball.getOldBallActor().getStrategyPosition().height);
+		
+		// Draw ball trajectory
 		int xPosition = _ball.getXPosition() - _ball.getRadius();
 		int yPosition = _ball.getYPosition() - _ball.getRadius();
 		int diameter = 2*_ball.getRadius();
 		g.setColor(Color.WHITE);
 		g.drawLine(_ball.getXOldPosition(), _ball.getYOldPosition(), _ball.getXPosition(), _ball.getYPosition());
+		
+		// Draw ball
 		g.fillArc(xPosition, yPosition, diameter, diameter, 0, 360);
 	}
 
