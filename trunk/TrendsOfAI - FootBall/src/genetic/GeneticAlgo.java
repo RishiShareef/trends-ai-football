@@ -114,24 +114,24 @@ public class GeneticAlgo {
 			ran = random.nextInt(strategy1.length+strategy2.length);
 			if(ran>10){
 				ran = ran%11;
-				if(random.nextDouble()<_mutationRate)
-					ran = random.nextInt(11);
+				//if(random.nextDouble()<_mutationRate)
+					//ran = random.nextInt(11);
 				while1 : while(newStrategy[ran]==null){
 					newStrategy[ran] = strategy2[ran];
 					ran = strategy2[ran];
 					if(random.nextDouble()<_mutationRate)
-						ran = random.nextInt(11);
+						ran = random.nextInt(12)-1;
 					if(ran==-1)
 						break while1;
 				}
 			}else{
-				if(random.nextDouble()<_mutationRate)
-					ran = random.nextInt(11);
+				//if(random.nextDouble()<_mutationRate)
+					//ran = random.nextInt(11);
 				while2 : while(newStrategy[ran]==null){
 					newStrategy[ran] = strategy2[ran];
 					ran = strategy2[ran];
 					if(random.nextDouble()<_mutationRate)
-						ran = random.nextInt(11);
+						ran = random.nextInt(12)-1;
 					if(ran==-1)
 						break while2;
 				}
