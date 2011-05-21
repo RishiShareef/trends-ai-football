@@ -50,9 +50,10 @@ public class Player implements BallActor {
 				alice.getYPosition(), bob.getXPosition(), bob.getYPosition());
 		if (distance > _visibility)
 			return false;
-		double proba = 1 / (distance / 10 + 1);
-//		System.out.println("Player::interceptBall >> player " + _playerPosition
-//				+ "; proba = " + proba);
+		double passLength = Calculate.calculatePointDistance(alice.getXPosition(), alice.getYPosition(), bob.getXPosition(), bob.getYPosition());
+		double proba = 1 / (10*distance / passLength + 1);
+		System.out.println("Player::interceptBall >> player " + _playerPosition
+				+ "; proba = " + proba);
 		// proba = 0;
 		Random random = new Random();
 		if (random.nextDouble() < proba) {
