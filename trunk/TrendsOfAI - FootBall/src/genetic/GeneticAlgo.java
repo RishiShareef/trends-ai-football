@@ -25,7 +25,8 @@ public class GeneticAlgo {
 			
 		Integer[] scores = new Championship(_ar_strategies).getScores();
 		_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
-		for(int i=0;i<_numberGenerations;i++){
+		for(int i=1;i<_numberGenerations;i++){
+			System.out.println("Génération " + i);
 			_ar_strategies = reproduction(scores);
 			scores = new Championship(_ar_strategies).getScores();
 			_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
@@ -113,20 +114,24 @@ public class GeneticAlgo {
 				ran = ran%11;
 				if(random.nextDouble()<_mutationRate)
 					ran = random.nextInt(11);
-				while(newStrategy[ran]==null){
+				while1 : while(newStrategy[ran]==null){
 					newStrategy[ran] = strategy2[ran];
 					ran = strategy2[ran];
 					if(random.nextDouble()<_mutationRate)
 						ran = random.nextInt(11);
+					if(ran==-1)
+						break while1;
 				}
 			}else{
 				if(random.nextDouble()<_mutationRate)
 					ran = random.nextInt(11);
-				while(newStrategy[ran]==null){
+				while2 : while(newStrategy[ran]==null){
 					newStrategy[ran] = strategy2[ran];
 					ran = strategy2[ran];
 					if(random.nextDouble()<_mutationRate)
 						ran = random.nextInt(11);
+					if(ran==-1)
+						break while2;
 				}
 			}
 		}

@@ -13,6 +13,7 @@ public class Championship {
 	private Dimension _fieldDimension;
 	
 	public Championship(ArrayList<Integer[]> strategies){
+		_ar_teams = new ArrayList<Team>();
 		_fieldDimension = new Dimension(1000, 600);
 		_ar_strategies = strategies;
 		for(int i=0;i<_ar_strategies.size();i++)
@@ -22,7 +23,9 @@ public class Championship {
 	public Integer[] getScores(){
 		Winner winner;
 		Match match;
-		Integer[] scores = new Integer[11];
+		Integer[] scores = new Integer[_ar_teams.size()+1];
+		for(int i=0;i<scores.length;i++)
+			scores[i]=0;
 		for(int i=0;i<_ar_teams.size();i++){
 			for(int j=i+1;j<_ar_teams.size();j++){
 				match = new Match(_ar_teams.get(i),_ar_teams.get(j),null);
