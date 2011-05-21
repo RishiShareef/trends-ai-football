@@ -3,8 +3,6 @@ package genetic;
 import java.util.ArrayList;
 import java.util.Random;
 
-import model.Team;
-
 public class GeneticAlgo {
 
 	private int _populationSize;

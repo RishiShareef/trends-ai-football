@@ -44,9 +44,10 @@ public class Match {
 			
 			_ball.updatePosition();
 			
-			_fieldPanel.repaint();
+			if(_fieldPanel!=null)
+				_fieldPanel.repaint();
 			try {
-				Thread.sleep(1000);
+				//Thread.sleep(1000);
 			} catch (Exception e) {e.printStackTrace();}
 		}
 		
@@ -75,17 +76,6 @@ public class Match {
 			_ball.setBallActor(_teamHome.getRandomPlayer());
 		}
 	}
-	
-//	public void checkGoal() {
-//		if(_ball.getXPosition() <= 0 && _ball.getYPosition() <= _fieldPanel.getHeight()/2 + 37 && _ball.getYPosition() >= _fieldPanel.getHeight()/2 - 37) {
-//			_ball.setPosition(_fieldPanel.getWidth()/2, _fieldPanel.getHeight()/2);
-//			System.out.println("Visitor scored !");
-//		}
-//		else if(_ball.getXPosition() >= _fieldPanel.getWidth() && _ball.getYPosition() <= _fieldPanel.getHeight()/2 + 37 && _ball.getYPosition() >= _fieldPanel.getHeight()/2 - 37) {
-//			_ball.setPosition(_fieldPanel.getWidth()/2, _fieldPanel.getHeight()/2);
-//			System.out.println("Home scored !");
-//		}
-//	}
 	
 	public Ball getBall(){return _ball;}
 	
