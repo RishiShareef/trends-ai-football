@@ -52,7 +52,7 @@ public class FieldPanel extends JPanel {
 		int yPosition = _ball.getBallActor().getYPosition() - _ball.getRadius();
 		int diameter = 2*_ball.getRadius();
 		g.setColor(Color.WHITE);
-		g.drawLine(_ball.getBallActor().getXPosition(), _ball.getBallActor().getYPosition(), _ball.getXPosition(), _ball.getYPosition());
+		g.drawLine(_ball.getBallActor().getXPosition(), _ball.getBallActor().getYPosition(), _ball.getNextBallActor().getXPosition(), _ball.getNextBallActor().getYPosition());
 		
 		// Draw ball
 		g.fillArc(xPosition, yPosition, diameter, diameter, 0, 360);

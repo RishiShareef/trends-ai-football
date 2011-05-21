@@ -10,7 +10,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-//		GeneticAlgo algo = new GeneticAlgo(20,1000);
+//		GeneticAlgo algo = new GeneticAlgo(20,1000,0.1);
 //		Integer[] best = algo.getBestStrategy();
 		new MainFrame();
 	}

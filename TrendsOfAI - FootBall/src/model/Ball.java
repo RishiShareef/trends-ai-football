@@ -6,19 +6,11 @@ public class Ball {
 	private BallActor _bob;
 	private BallActor _alice;
 	private BallActor _oscar;
-	private int _xPosition;
-	private int _yPosition;
-	private int _xOldPosition;
-	private int _yOldPosition;
 	private int _radius;
 	private Match _match;
 	
 	public Ball(BallActor ballActor, Match match) {
 		_alice = ballActor;
-		_xOldPosition = _alice.getXPosition();
-		_yOldPosition = _alice.getYPosition();
-		_xPosition = _alice.getXPosition();
-		_yPosition = _alice.getYPosition();
 		_radius = 7;
 		_match = match;
 	}
@@ -48,14 +40,6 @@ public class Ball {
 			_alice = _bob;
 		_oscar = null;
 		_bob = null;
-		setPosition(_alice.getXPosition(), _alice.getYPosition());
-	}
-	
-	public void setPosition(int xPosition, int yPosition){
-		_xOldPosition = _xPosition;
-		_yOldPosition = _yPosition;
-		_xPosition = xPosition;
-		_yPosition = yPosition;
 	}
 	
 	public Location getLocationTeamPlaying() {
@@ -63,11 +47,6 @@ public class Ball {
 	}
 	
 	public int getRadius() {return _radius;}
-	public int getXPosition() {return _xPosition;}
-	public int getYPosition() {return _yPosition;}
-	public int getXOldPosition() {return _xOldPosition;}
-	public int getYOldPosition() {return _yOldPosition;}
-	public Dimension getPosition() {return new Dimension(_xPosition, _yPosition);}
 
 	public void print() {
 		System.out.println("Ball::print >> ");
@@ -88,4 +67,5 @@ public class Ball {
 	}
 	public BallActor getBallActor() {return _alice;}
 	public BallActor getDesiredBallActor() {return _bob;}
+	public BallActor getNextBallActor() {if(_oscar != null) return _oscar; return _bob;}
 }
