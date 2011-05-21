@@ -37,6 +37,13 @@ public class Ball {
 		_ballActor = ballActor;
 	}
 	
+	public void setBallIntercepted(BallActor ballActor) {
+		/*
+		 * When ball is intercepted, old ball actor does not change !
+		 */
+		_ballActor = ballActor;
+	}
+	
 	public void setPosition(int xPosition, int yPosition){
 		_xOldPosition = _xPosition;
 		_yOldPosition = _yPosition;
@@ -56,8 +63,13 @@ public class Ball {
 		System.out.println("\towner = " + _ballActor.getPosition());
 	}
 
-	public boolean canInteract(BallActor ballActor) {
-		return (!(ballActor == _ballActor || ballActor == _oldBallActor));
+	public boolean isPlaying(BallActor ballActor) {
+		System.out.println("Ball::isPlaying >> " + _oldBallActor.getPosition() + " passes to " + _ballActor.getPosition());
+		if(ballActor == _ballActor)
+			return true;
+		if(ballActor == _oldBallActor)
+			return true;
+		return false;
 	}
 
 	public void setGoal(Location location) {
