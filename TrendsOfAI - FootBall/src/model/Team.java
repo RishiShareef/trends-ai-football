@@ -81,9 +81,9 @@ public class Team {
 			randomPass = random.nextInt(_numberPlayers);
 		}
 		while(randomPass == 1);
-		_ar_player.add(new Keeper(this, 10, _fieldDimension.height/2, randomPass));
+		_ar_player.add(new Keeper(this, 0, 0, randomPass));
 		for(int i = 0; i<_numberPlayers-1; i++) {
-			int position = i+2;
+			int position = i+1;
 			do {
 				randomPass = random.nextInt(_numberPlayers);
 				if(random.nextDouble() < _probaShoot) {
@@ -95,7 +95,7 @@ public class Team {
 		}
 	}
 	
-	public void score(){
+	public void score() {
 		_score++;
 	}
 	

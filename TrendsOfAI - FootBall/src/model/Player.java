@@ -40,26 +40,23 @@ public class Player implements BallActor {
 	}
 	
 	public boolean interceptBall(Ball ball) {
-		if(!ball.canInteract(this)) {
-			System.out.println("Player::interceptBall >> Player " + _playerPosition + " gets the ball");
+		if(!ball.isPlaying(this)) {
 			return false;
 		}
 		double distance = Calculate.calculateSegmentRightPointDistance(_xPosition, _yPosition, ball.getXOldPosition(), ball.getYOldPosition(), ball.getXPosition(), ball.getYPosition());
-//		System.out.println("Player::interceptBall >> position = " + _playerPosition + "; distance = " + distance);
-//		if(distance > _visibility)
-//			return false;
 		double proba = 1/(distance/10+1);
+		System.out.println("Player::interceptBall >> player " + _playerPosition + "; proba = " + proba);
 		Random random = new Random();
 		if(random.nextDouble() < proba) {
-			ball.setBallActor(this);
+			ball.setBallIntercepted(this);
 			return true;
 		}
 		return false;
 	}
 	
 	public void setPosition(int posX, int posY){
-		this._xPosition = posX;
-		this._yPosition = posY;
+		_xPosition = posX;
+		_yPosition = posY;
 	}
 	
 	public int getXPosition(){return _xPosition;}
