@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Random;
 
-import view.FieldPanel;
-
 public class Team {
 
 	private ArrayList<Player> _ar_player;
@@ -49,7 +47,7 @@ public class Team {
 		this(fieldDimension);
 		_ar_player = new ArrayList<Player>();
 		for(int i = 0; i<_numberPlayers; i++) {
-			_ar_player.add(new Player(this,0,0, ar_playerStrategy[i], i));
+			_ar_player.add(new Player(this, _fieldDimension.width/2, fieldDimension.height/2, ar_playerStrategy[i], i));
 		}
 	}
 	

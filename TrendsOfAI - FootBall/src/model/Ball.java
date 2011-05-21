@@ -3,8 +3,9 @@ package model;
 import java.awt.Dimension;
 
 public class Ball {
-	private BallActor _ballActor;
-	private BallActor _oldBallActor;
+	private BallActor _bob;
+	private BallActor _alice;
+	private BallActor _oscar;
 	private int _xPosition;
 	private int _yPosition;
 	private int _xOldPosition;
@@ -13,10 +14,11 @@ public class Ball {
 	private Match _match;
 	
 	public Ball(BallActor ballActor, Match match) {
-		_ballActor = ballActor;
-		_oldBallActor = ballActor;
-		_xOldPosition = _ballActor.getXPosition();
-		_yOldPosition = _ballActor.getYPosition();
+		_alice = ballActor;
+		_xOldPosition = _alice.getXPosition();
+		_yOldPosition = _alice.getYPosition();
+		_xPosition = _alice.getXPosition();
+		_yPosition = _alice.getYPosition();
 		_radius = 7;
 		_match = match;
 	}
@@ -25,23 +27,28 @@ public class Ball {
 		/*
 		 * Ask the owner to shoot
 		 */
-		_ballActor.acts(this);
-	}
-
-	public void updatePosition() {
-		setPosition(_ballActor.getXPosition(), _ballActor.getYPosition());
+		_alice.acts(this);
 	}
 	
-	public void setBallActor(BallActor ballActor){
-		_oldBallActor = _ballActor;
-		_ballActor = ballActor;
+	public void setDesiredBallActor(BallActor ballActor){
+		_bob = ballActor;
 	}
 	
 	public void setBallIntercepted(BallActor ballActor) {
 		/*
 		 * When ball is intercepted, old ball actor does not change !
 		 */
-		_ballActor = ballActor;
+		_oscar = ballActor;
+	}
+	
+	public void updatePosition() {
+		if(_oscar != null)
+			_alice = _oscar;
+		else
+			_alice = _bob;
+		_oscar = null;
+		_bob = null;
+		setPosition(_alice.getXPosition(), _alice.getYPosition());
 	}
 	
 	public void setPosition(int xPosition, int yPosition){
@@ -52,7 +59,7 @@ public class Ball {
 	}
 	
 	public Location getLocationTeamPlaying() {
-		return _ballActor.getLocation();
+		return _alice.getLocation();
 	}
 	
 	public int getRadius() {return _radius;}
@@ -64,14 +71,14 @@ public class Ball {
 
 	public void print() {
 		System.out.println("Ball::print >> ");
-		System.out.println("\towner = " + _ballActor.getPosition());
+		System.out.println("\towner = " + _alice.getPosition());
 	}
 
 	public boolean isPlaying(BallActor ballActor) {
-		System.out.println("Ball::isPlaying >> " + _oldBallActor.getPosition() + " passes to " + _ballActor.getPosition());
-		if(ballActor == _ballActor)
+//		System.out.println("Ball::isPlaying >> " + _oldBallActor.getPosition() + " passes to " + _ballActor.getPosition());
+		if(ballActor == _alice)
 			return true;
-		if(ballActor == _oldBallActor)
+		if(ballActor == _bob)
 			return true;
 		return false;
 	}
@@ -79,6 +86,6 @@ public class Ball {
 	public void setGoal(Location location) {
 		_match.setGoal(location);
 	}
-	public BallActor getBallActor() {return _ballActor;}
-	public BallActor getOldBallActor() {return _oldBallActor;}
+	public BallActor getBallActor() {return _alice;}
+	public BallActor getDesiredBallActor() {return _bob;}
 }
