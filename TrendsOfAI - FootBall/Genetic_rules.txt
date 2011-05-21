@@ -25,8 +25,15 @@ Championnat de x équipes (50)
 Match 2 à 2 (pas d'aller retour)
 Points: 3 1 0
 
-
 ORGANISATION DES MATCHS
 -----------------------
 
-Nombre de tic par match : 
+Nombre de tic par match :
+Interception : prob = 1/(1+(distance/10))
+Remise en jeu quand goal : Balle à joueur adverse aléatoire (plus tard peut être, emplacement aléatoire sur terrain -> joueur le plus proche)
+
+GENETIC
+-------
+
+X génération d'équipe
+Optionnel : à chaque génération, on retient le meilleur qui participera à la champions league !!!!!!!!!! 
