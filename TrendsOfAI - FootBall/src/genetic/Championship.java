@@ -19,7 +19,7 @@ public class Championship {
 			_ar_teams.add(new Team(_fieldDimension,_ar_strategies.get(i)));
 	}
 	
-	public Integer[] GetScores(){
+	public Integer[] getScores(){
 		Winner winner;
 		Match match;
 		Integer[] scores = new Integer[11];
@@ -27,6 +27,13 @@ public class Championship {
 			for(int j=i+1;j<_ar_teams.size();j++){
 				match = new Match(_ar_teams.get(i),_ar_teams.get(j),null);
 				winner = match.run();
+				if(winner == Winner.DRAW){
+					scores[i]+=1;
+					scores[j]+=1;
+				}else if(winner == Winner.HOME)
+					scores[i]+=3;
+				else
+					scores[j]+=3;
 			}
 		}
 		return scores;
