@@ -30,6 +30,8 @@ public class GeneticAlgo {
 			_ar_strategies = reproduction(scores);
 			scores = new Championship(_ar_strategies).getScores();
 			_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
+			printStrategy(_ar_strategies.get(getBestScoreId(scores)));
+			System.out.println("Score : " + scores[getBestScoreId(scores)]);
 		}
 		
 		scores = new Championship(_ar_champions).getScores();
@@ -155,4 +157,11 @@ public class GeneticAlgo {
 		return bestScoreId;
 	}
 	
+	public void printStrategy(Integer[] strategy){
+		for(int i=0;i<strategy.length;i++){
+			System.out.print(strategy[i] + " ");
+		}
+		System.out.println();
+		
+	}
 }
