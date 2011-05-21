@@ -45,7 +45,7 @@ public class Team {
 		_ar_player = ar_player;
 	}
 	
-	public Team(Dimension fieldDimension, int [] ar_playerStrategy) {
+	public Team(Dimension fieldDimension, Integer[] ar_playerStrategy) {
 		this(fieldDimension);
 		_ar_player = new ArrayList<Player>();
 		for(int i = 0; i<_numberPlayers; i++) {
