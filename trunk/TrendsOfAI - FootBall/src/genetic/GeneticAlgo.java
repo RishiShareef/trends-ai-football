@@ -46,8 +46,10 @@ public class GeneticAlgo {
 		return strategy;
 	}
 	
-	// Return true if strategy contains minimum 1 cycle
 	public boolean containCycle(Integer[] strategy){
+		/*
+		 * Return true if strategy contains minimum 1 cycle
+		 */
 		int currentPlayer;
 		for(int i=0;i<11;i++){
 			currentPlayer=i;
