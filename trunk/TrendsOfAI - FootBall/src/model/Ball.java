@@ -51,6 +51,10 @@ public class Ball {
 		_yPosition = yPosition;
 	}
 	
+	public Location getLocationTeamPlaying() {
+		return _ballActor.getLocation();
+	}
+	
 	public int getRadius() {return _radius;}
 	public int getXPosition() {return _xPosition;}
 	public int getYPosition() {return _yPosition;}
@@ -75,4 +79,6 @@ public class Ball {
 	public void setGoal(Location location) {
 		_match.setGoal(location);
 	}
+	public BallActor getBallActor() {return _ballActor;}
+	public BallActor getOldBallActor() {return _oldBallActor;}
 }
