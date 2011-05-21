@@ -23,6 +23,7 @@ public class FieldPanel extends JPanel {
 	public FieldPanel(int xSize, int ySize) {
 		_xSize = xSize;
 		_ySize = ySize;
+		_ar_player = new ArrayList<Player>();
 		validate();
 		repaint();
 	}

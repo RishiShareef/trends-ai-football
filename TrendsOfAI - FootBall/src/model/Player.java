@@ -6,7 +6,7 @@ import java.util.Random;
 
 import org.omg.CORBA._PolicyStub;
 
-public class Player {
+public class Player implements BallActor {
 	
 	protected double _visibility = 500;
 	protected int _xPosition;
@@ -32,25 +32,26 @@ public class Player {
 	
 	public void acts(Ball ball){
 		if(_pass==-1){
-			ball.setPosition(_team.getGoal().width, _team.getGoal().height);
+			ball.setBallActor(_team.getGoal());
 		}else {
-			ball.setOwner(_team.getPlayer(_pass));
+			ball.setBallActor(_team.getPlayer(_pass));
 		}
 		
 	}
 	
 	public boolean interceptBall(Ball ball) {
-		if(ball.isOwner(this)) {
+		if(!ball.canInteract(this)) {
+			System.out.println("Player::interceptBall >> Player " + _playerPosition + " gets the ball");
 			return false;
 		}
-		double distance = Calculate.calculateRightPointDistance(_xPosition, _yPosition, ball.getXPosition(), ball.getYPosition(), ball.getXOldPosition(), ball.getYOldPosition());
-		System.out.println("Player::interceptBall >> position = " + _playerPosition + "; distance = " + distance);
-		if(distance > _visibility)
-			return false;
+		double distance = Calculate.calculateSegmentRightPointDistance(_xPosition, _yPosition, ball.getXOldPosition(), ball.getYOldPosition(), ball.getXPosition(), ball.getYPosition());
+//		System.out.println("Player::interceptBall >> position = " + _playerPosition + "; distance = " + distance);
+//		if(distance > _visibility)
+//			return false;
 		double proba = 1/(distance/10+1);
 		Random random = new Random();
 		if(random.nextDouble() < proba) {
-			ball.setOwner(this);
+			ball.setBallActor(this);
 			return true;
 		}
 		return false;
