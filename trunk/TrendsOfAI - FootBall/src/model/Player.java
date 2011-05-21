@@ -40,7 +40,7 @@ public class Player implements BallActor {
 	}
 	
 	public boolean interceptBall(Ball ball) {
-		if(!ball.isPlaying(this)) {
+		if(ball.isPlaying(this)) {
 			return false;
 		}
 		double distance = Calculate.calculateSegmentRightPointDistance(_xPosition, _yPosition, ball.getXOldPosition(), ball.getYOldPosition(), ball.getXPosition(), ball.getYPosition());

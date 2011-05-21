@@ -4,7 +4,12 @@ public class Calculate {
 
 	public static double calculatePointDistance(double xPoint1, double yPoint1, double xPoint2, double yPoint2) {
 		
-		return Math.sqrt((xPoint1 - xPoint2)*(xPoint1 - xPoint2) + (yPoint1 - yPoint2)*(yPoint1 - yPoint2));
+		return Math.sqrt(calculatePointDistanceSquare(xPoint1, yPoint1, xPoint2, yPoint2));
+	}
+	
+	public static double calculatePointDistanceSquare(double xPoint1, double yPoint1, double xPoint2, double yPoint2) {
+		
+		return (xPoint1 - xPoint2)*(xPoint1 - xPoint2) + (yPoint1 - yPoint2)*(yPoint1 - yPoint2);
 	}
 	
 	public static double calculateRightPointDistance(double xPoint, double yPoint, double xRight1, double yRight1, double xRight2, double yRight2) {
@@ -19,18 +24,18 @@ public class Calculate {
 	public static double calculateSegmentRightPointDistance(int xPlayer, int yPlayer, int xBallOld, int yBallOld, int xBallNew,	int yBallNew) {
 		/*
 		 * Returns distance to a right segment
-		 * a = distance(ballOld, ballNew)
-		 * b = distance(ballOld, playerPosition)
-		 * c = distance(ballNew, playerPosition)
+		 * a2 = distance(ballOld, ballNew)^2
+		 * b2 = distance(ballOld, playerPosition)^2
+		 * c2 = distance(ballNew, playerPosition)^2
 		 */
-		double a = calculatePointDistance(xBallOld, yBallOld, xBallNew, yBallNew);
-		double b = calculatePointDistance(xBallOld, yBallOld, xPlayer, yPlayer);
-		double c = calculatePointDistance(xBallNew, yBallNew, xPlayer, yPlayer);
+		double a2 = calculatePointDistanceSquare(xBallOld, yBallOld, xBallNew, yBallNew);
+		double b2 = calculatePointDistanceSquare(xBallOld, yBallOld, xPlayer, yPlayer);
+		double c2 = calculatePointDistanceSquare(xBallNew, yBallNew, xPlayer, yPlayer);
 		
-		if(b*b > a*a + c*c)
-			return c;
-		else if(c*c > a*a + b*b)
-			return b;
+		if(b2 > a2 + c2)
+			return Math.sqrt(c2);
+		else if(c2 > a2 + b2)
+			return Math.sqrt(b2);
 		else
 			return calculateRightPointDistance(xPlayer, yPlayer, xBallOld, yBallOld, xBallNew, yBallNew);
 	}
