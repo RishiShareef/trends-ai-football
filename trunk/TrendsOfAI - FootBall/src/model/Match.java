@@ -42,14 +42,14 @@ public class Match {
 				_teamHome.interceptBall(_ball);
 			}
 			
-			_ball.updatePosition();
-			
 			if(_fieldPanel!=null) {
 				_fieldPanel.repaint();
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 				} catch (Exception e) {e.printStackTrace();}
 			}
+			
+			_ball.updatePosition();
 		}
 		
 		if(_teamHome.getScore() > _teamVisitor.getScore())
@@ -69,13 +69,14 @@ public class Match {
 		if(location == Location.HOME) {
 			System.out.println("HOME SCORED !!!");
 			_teamHome.score();
-			_ball.setBallActor(_teamVisitor.getRandomPlayer());
+			_ball.setDesiredBallActor(_teamVisitor.getRandomPlayer());
 		}
 		else if(location == Location.VISITOR) {
 			System.out.println("VISITOR SCORED !!!");
 			_teamVisitor.score();
-			_ball.setBallActor(_teamHome.getRandomPlayer());
+			_ball.setDesiredBallActor(_teamHome.getRandomPlayer());
 		}
+		_ball.updatePosition();
 	}
 	
 	public Ball getBall(){return _ball;}

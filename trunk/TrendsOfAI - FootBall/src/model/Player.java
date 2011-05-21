@@ -8,7 +8,7 @@ import org.omg.CORBA._PolicyStub;
 
 public class Player implements BallActor {
 	
-	protected double _visibility = 500;
+	protected double _visibility = 70; // max distance to intercept ball
 	protected int _xPosition;
 	protected int _yPosition;
 	protected Team _team;
@@ -31,12 +31,13 @@ public class Player implements BallActor {
 	}
 	
 	public void acts(Ball ball){
+		BallActor alice;
 		if(_pass==-1){
-			ball.setBallActor(_team.getGoal());
+			alice = _team.getGoal();
 		}else {
-			ball.setBallActor(_team.getPlayer(_pass));
+			alice = _team.getPlayer(_pass);
 		}
-		
+		ball.setDesiredBallActor(alice);
 	}
 	
 	public boolean interceptBall(Ball ball) {
@@ -44,9 +45,11 @@ public class Player implements BallActor {
 			return false;
 		}
 		double distance = Calculate.calculateSegmentRightPointDistance(_xPosition, _yPosition, ball.getXOldPosition(), ball.getYOldPosition(), ball.getXPosition(), ball.getYPosition());
-		double proba = 1/(distance/10+1);
+		if(distance > _visibility)
+			return false;
+		double proba = 1/(distance/100+1);
 		System.out.println("Player::interceptBall >> player " + _playerPosition + "; proba = " + proba);
-		proba = 0;
+//		proba = 0;
 		Random random = new Random();
 		if(random.nextDouble() < proba) {
 			ball.setBallIntercepted(this);
