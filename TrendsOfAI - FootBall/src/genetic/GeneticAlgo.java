@@ -14,13 +14,15 @@ public class GeneticAlgo {
 	public GeneticAlgo(int populationSize,int numberGeneration,double mutationRate){
 		_populationSize = populationSize;
 		_numberGenerations = numberGeneration;
-		_mutationRate = mutationRate%1.0;
+		_mutationRate = mutationRate;
 		_ar_champions = new ArrayList<Integer[]>();
 	}
 	
 	public Integer[] getBestStrategy(){
 		_ar_strategies = new ArrayList<Integer[]>();
-		for(int i=0;i<_populationSize;i++)
+		Integer [] ar_home = {1,5,5,8,9,8,9,10,-1,8,-1};
+		_ar_strategies.add(ar_home);
+		for(int i=1;i<_populationSize;i++)
 			_ar_strategies.add(createRandomStrategy());
 			
 		Integer[] scores = new Championship(_ar_strategies).getScores();
@@ -32,6 +34,8 @@ public class GeneticAlgo {
 			_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
 			printStrategy(_ar_strategies.get(getBestScoreId(scores)));
 			System.out.println("Score : " + scores[getBestScoreId(scores)]);
+			for(int k=0;k<_ar_strategies.size();k++)
+				printStrategy(_ar_strategies.get(k));
 		}
 		
 		scores = new Championship(_ar_champions).getScores();
