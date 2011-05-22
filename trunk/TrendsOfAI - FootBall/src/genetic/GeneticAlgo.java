@@ -28,7 +28,7 @@ public class GeneticAlgo {
 		Integer[] scores = new Championship(_ar_strategies).getScores();
 		_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
 		for(int i=1;i<_numberGenerations;i++){
-			System.out.println("Génération " + i);
+			System.out.println("Gï¿½nï¿½ration " + i);
 			_ar_strategies = reproduction(scores);
 			scores = new Championship(_ar_strategies).getScores();
 			_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
@@ -80,15 +80,15 @@ public class GeneticAlgo {
 		for(int i=0;i<scores.length;i++)
 			totalScore += scores[i];
 		for(int i=1;i<_populationSize;i++){
-			strategyId1 = choseteam(scores, totalScore, -1);
-			strategyId2 = choseteam(scores, totalScore, strategyId1);
-			ar_newPopulation.add(mate(_ar_strategies.get(strategyId1), _ar_strategies.get(strategyId2)));
+			strategyId1 = chooseteam(scores, totalScore, -1);
+			strategyId2 = chooseteam(scores, totalScore, strategyId1);
+			ar_newPopulation.add(mateOnePointCrossOver(_ar_strategies.get(strategyId1), _ar_strategies.get(strategyId2)));
 		}
 		return ar_newPopulation;
 		
 	}
 	
-	private int choseteam(Integer[] scores, int totalScore, int firstTeam){
+	private int chooseteam(Integer[] scores, int totalScore, int firstTeam){
 		Random random = new Random();
 		int ran, temp;
 		int currentTeam = firstTeam;
@@ -108,7 +108,7 @@ public class GeneticAlgo {
 		return currentTeam;
 	}
 	
-	private Integer[] mate(Integer[] strategy1,Integer[] strategy2){
+	private Integer[] mateCycle(Integer[] strategy1,Integer[] strategy2){
 		Random random = new Random();
 		int ran;
 		Integer[] newStrategy = new Integer[11];
@@ -141,6 +141,19 @@ public class GeneticAlgo {
 				}
 			}
 		}
+		return newStrategy;
+	}
+	
+	private Integer[] mateOnePointCrossOver(Integer[] strategy1,Integer[] strategy2){
+		Random random = new Random();
+		int crossOverPoint = random.nextInt(12);
+		Integer[] newStrategy = new Integer[11];
+		
+		for(int i=0;i<crossOverPoint;i++)
+			newStrategy[i]=strategy1[i];
+		for(int i=crossOverPoint; i<11; i++)
+			newStrategy[i] = strategy2[i];		
+		
 		return newStrategy;
 	}
 	
