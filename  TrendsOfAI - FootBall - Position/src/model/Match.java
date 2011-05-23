@@ -19,9 +19,9 @@ public class Match {
 				
 		_fieldPanel = fieldPanel;
 		_teamHome = teamHome;
-		_teamHome.beginMatch(this, Color.BLUE, Location.HOME);
+		_teamHome.beginMatch(this, Color.BLUE, Location.HOME, false);
 		_teamVisitor = teamVisitor;
-		_teamVisitor.beginMatch(this, Color.RED, Location.VISITOR);
+		_teamVisitor.beginMatch(this, Color.RED, Location.VISITOR, false);
 		_teamHome.setOpponent(_teamVisitor);
 		_teamVisitor.setOpponent(_teamHome);
 		_ball = new Ball(_teamHome.getRandomPlayer(), this);
@@ -45,7 +45,7 @@ public class Match {
 			if(_fieldPanel!=null) {
 				_fieldPanel.repaint();
 				try {
-					Thread.sleep(10);
+					Thread.sleep(500);
 				} catch (Exception e) {e.printStackTrace();}
 			}
 			

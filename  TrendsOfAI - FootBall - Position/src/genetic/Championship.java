@@ -8,11 +8,11 @@ import model.Team;
 
 public class Championship {
 	
-	private ArrayList<Integer[]> _ar_strategies;
+	private ArrayList<Integer[][]> _ar_strategies;
 	private ArrayList<Team> _ar_teams;
 	private Dimension _fieldDimension;
 	
-	public Championship(ArrayList<Integer[]> strategies){
+	public Championship(ArrayList<Integer[][]> strategies){
 		_ar_teams = new ArrayList<Team>();
 		_fieldDimension = new Dimension(1000, 600);
 		_ar_strategies = strategies;
