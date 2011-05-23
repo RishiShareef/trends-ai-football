@@ -50,7 +50,12 @@ public class GeneticAlgo {
 		Integer[] strategy = new Integer[11];
 		Random random = new Random();
 		for (int i = 0; i < 11; i++) {
-			strategy[i] = random.nextInt(12) - 1;
+			if(random.nextDouble() < _probaShoot) {
+				strategy[i] = -1;
+			}
+			else {
+				strategy[i] = random.nextInt(12) - 1;
+			}
 		}
 		if (containCycle(strategy))
 			return createRandomStrategy();
