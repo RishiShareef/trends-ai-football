@@ -123,6 +123,10 @@ public class Team {
 //		ball.setOwner(newOwner);
 //	}
 	
+	public void replaceAr_Player() {
+		
+	}
+	
 	private void replacePlayerHOME(){
 		
 //		_ar_player.get(0).setPosition(1*_fieldDimension.width/20, _fieldDimension.height/2);
