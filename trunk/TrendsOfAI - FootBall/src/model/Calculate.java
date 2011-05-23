@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Random;
+
 public class Calculate {
 
 	public static double calculatePointDistance(double xPoint1, double yPoint1, double xPoint2, double yPoint2) {
@@ -40,6 +42,18 @@ public class Calculate {
 //			return Math.sqrt(b2);
 		else
 			return calculateRightPointDistance(xPlayer, yPlayer, xBallOld, yBallOld, xBallNew, yBallNew);
+	}
+	
+	public static int [] permut(int [] ar_int) {
+		Random random = new Random();
+		for (int i = 0; i<ar_int.length; i++) {
+		    int randomPosition = random.nextInt(ar_int.length);
+		    int temp = ar_int[randomPosition];
+		    ar_int[randomPosition] = ar_int[i];
+		    ar_int[i] = temp;
+		}
+		
+		return ar_int;
 	}
 	
 }

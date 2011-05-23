@@ -68,8 +68,15 @@ public class Team {
 	}
 	
 	public void acts(Ball ball){
-		for(Player player : _ar_player)
-			player.acts(ball);
+		int [] ar_playerID = new int [_ar_player.size()];
+		for(int i = 0; i<_ar_player.size(); i++) {
+			ar_playerID[i] = i;
+		}
+		ar_playerID = Calculate.permut(ar_playerID);
+		for(int i = 0; i<_ar_player.size(); i++) {
+			System.out.println("Team::acts >> + " + ar_playerID[i]);
+			_ar_player.get(ar_playerID[i]).acts(ball);
+		}
 	}
 	
 	private void generateRandomPlayers() {
@@ -97,8 +104,13 @@ public class Team {
 	}
 	
 	public boolean interceptBall(Ball ball) {
-		for(Player player : _ar_player) {
-			if(player.interceptBall(ball))
+		int [] ar_playerID = new int [_ar_player.size()];
+		for(int i = 0; i<_ar_player.size(); i++) {
+			ar_playerID[i] = i;
+		}
+		ar_playerID = Calculate.permut(ar_playerID);
+		for(int i = 0; i<_ar_player.size(); i++) {
+			if(_ar_player.get(ar_playerID[i]).interceptBall(ball))
 				return true;
 		}
 		
