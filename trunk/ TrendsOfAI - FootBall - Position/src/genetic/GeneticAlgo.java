@@ -10,6 +10,8 @@ public class GeneticAlgo {
 	private double _mutationRate;
 	private ArrayList<Integer[]> _ar_strategies;
 	private ArrayList<Integer[]> _ar_champions;
+	private static final double _reproductionRate = 1;
+	private static final double _probaShoot = 0.3;
 
 	public GeneticAlgo(int populationSize, int numberGeneration,
 			double mutationRate) {
@@ -33,6 +35,7 @@ public class GeneticAlgo {
 			_ar_strategies = reproduction(scores);
 			scores = new Championship(_ar_strategies).getScores();
 			_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
+			
 			printStrategy(_ar_strategies.get(getBestScoreId(scores)));
 			System.out.println("Score : " + scores[getBestScoreId(scores)]);
 			for (int k = 0; k < _ar_strategies.size(); k++)
@@ -47,7 +50,12 @@ public class GeneticAlgo {
 		Integer[] strategy = new Integer[11];
 		Random random = new Random();
 		for (int i = 0; i < 11; i++) {
-			strategy[i] = random.nextInt(12) - 1;
+			if(random.nextDouble() < _probaShoot) {
+				strategy[i] = -1;
+			}
+			else {
+				strategy[i] = random.nextInt(12) - 1;
+			}
 		}
 		if (containCycle(strategy))
 			return createRandomStrategy();
@@ -80,12 +88,17 @@ public class GeneticAlgo {
 		int totalScore = 0;
 		for (int i = 0; i < scores.length; i++)
 			totalScore += scores[i];
-		for (int i = 1; i < _populationSize; i++) {
+		int numberReproducted = ((Double)((double)_populationSize * _reproductionRate)).intValue();
+		for (int i = 1; i < numberReproducted; i++) {
 			strategyId1 = chooseteam(scores, totalScore, -1);
 			strategyId2 = chooseteam(scores, totalScore, strategyId1);
 			ar_newPopulation.add(mateOnePointCrossOver(_ar_strategies.get(strategyId1),
 					_ar_strategies.get(strategyId2)));
 		}
+		for (int i = numberReproducted; i < _populationSize; i++) {
+			ar_newPopulation.add(createRandomStrategy());
+		}
+		
 		return ar_newPopulation;
 
 	}
