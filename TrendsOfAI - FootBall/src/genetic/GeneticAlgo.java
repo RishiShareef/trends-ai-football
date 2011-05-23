@@ -10,6 +10,7 @@ public class GeneticAlgo {
 	private double _mutationRate;
 	private ArrayList<Integer[]> _ar_strategies;
 	private ArrayList<Integer[]> _ar_champions;
+	private double _reproductionRate;
 
 	public GeneticAlgo(int populationSize, int numberGeneration,
 			double mutationRate) {
@@ -17,14 +18,15 @@ public class GeneticAlgo {
 		_numberGenerations = numberGeneration;
 		_mutationRate = mutationRate;
 		_ar_champions = new ArrayList<Integer[]>();
+		_reproductionRate = 0.75; // Represents the fraction of agents to be reproduct
 	}
 
 	public Integer[] getBestStrategy() {
 		_ar_strategies = new ArrayList<Integer[]>();
 		for (int i = 0; i < _populationSize; i++)
 			_ar_strategies.add(createRandomStrategy());
-		Integer[] ar_home = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
-		_ar_strategies.add(ar_home);
+//		Integer[] ar_home = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+//		_ar_strategies.add(ar_home);
 
 		Integer[] scores = new Championship(_ar_strategies).getScores();
 		_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
@@ -33,10 +35,11 @@ public class GeneticAlgo {
 			_ar_strategies = reproduction(scores);
 			scores = new Championship(_ar_strategies).getScores();
 			_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
-			printStrategy(_ar_strategies.get(getBestScoreId(scores)));
-			System.out.println("Score : " + scores[getBestScoreId(scores)]);
-			for (int k = 0; k < _ar_strategies.size(); k++)
-				printStrategy(_ar_strategies.get(k));
+			
+//			printStrategy(_ar_strategies.get(getBestScoreId(scores)));
+//			System.out.println("Score : " + scores[getBestScoreId(scores)]);
+//			for (int k = 0; k < _ar_strategies.size(); k++)
+//				printStrategy(_ar_strategies.get(k));
 		}
 
 		scores = new Championship(_ar_champions).getScores();
@@ -80,12 +83,17 @@ public class GeneticAlgo {
 		int totalScore = 0;
 		for (int i = 0; i < scores.length; i++)
 			totalScore += scores[i];
-		for (int i = 1; i < _populationSize; i++) {
+		int numberReproducted = ((Double)((double)_populationSize * _reproductionRate)).intValue();
+		for (int i = 1; i < numberReproducted; i++) {
 			strategyId1 = chooseteam(scores, totalScore, -1);
 			strategyId2 = chooseteam(scores, totalScore, strategyId1);
-			ar_newPopulation.add(mateCycle(_ar_strategies.get(strategyId1),
+			ar_newPopulation.add(mateOnePointCrossOver(_ar_strategies.get(strategyId1),
 					_ar_strategies.get(strategyId2)));
 		}
+		for (int i = numberReproducted; i < _populationSize; i++) {
+			ar_newPopulation.add(createRandomStrategy());
+		}
+		
 		return ar_newPopulation;
 
 	}
