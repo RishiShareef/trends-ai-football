@@ -10,7 +10,7 @@ public class GeneticAlgo {
 	private double _mutationRate;
 	private ArrayList<Integer[]> _ar_strategies;
 	private ArrayList<Integer[]> _ar_champions;
-	private static final double _reproductionRate = 0.75;
+	private static final double _reproductionRate = 1;
 	private static final double _probaShoot = 0.3;
 
 	public GeneticAlgo(int populationSize, int numberGeneration,
