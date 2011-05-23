@@ -10,7 +10,8 @@ public class GeneticAlgo {
 	private double _mutationRate;
 	private ArrayList<Integer[]> _ar_strategies;
 	private ArrayList<Integer[]> _ar_champions;
-	private double _reproductionRate;
+	private static final double _reproductionRate = 0.75;
+	private static final double _probaShoot = 0.3;
 
 	public GeneticAlgo(int populationSize, int numberGeneration,
 			double mutationRate) {
@@ -18,7 +19,6 @@ public class GeneticAlgo {
 		_numberGenerations = numberGeneration;
 		_mutationRate = mutationRate;
 		_ar_champions = new ArrayList<Integer[]>();
-		_reproductionRate = 0.75; // Represents the fraction of agents to be reproduct
 	}
 
 	public Integer[] getBestStrategy() {
@@ -36,10 +36,10 @@ public class GeneticAlgo {
 			scores = new Championship(_ar_strategies).getScores();
 			_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
 			
-//			printStrategy(_ar_strategies.get(getBestScoreId(scores)));
-//			System.out.println("Score : " + scores[getBestScoreId(scores)]);
-//			for (int k = 0; k < _ar_strategies.size(); k++)
-//				printStrategy(_ar_strategies.get(k));
+			printStrategy(_ar_strategies.get(getBestScoreId(scores)));
+			System.out.println("Score : " + scores[getBestScoreId(scores)]);
+			for (int k = 0; k < _ar_strategies.size(); k++)
+				printStrategy(_ar_strategies.get(k));
 		}
 
 		scores = new Championship(_ar_champions).getScores();
