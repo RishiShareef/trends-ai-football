@@ -8,8 +8,8 @@ public class GeneticAlgo {
 	private int _populationSize;
 	private int _numberGenerations;
 	private double _mutationRate;
-	private ArrayList<Integer[]> _ar_strategies;
-	private ArrayList<Integer[]> _ar_champions;
+	private ArrayList<Integer[][]> _ar_strategies;
+	private ArrayList<Integer[][]> _ar_champions;
 	private static final double _reproductionRate = 1;
 	private static final double _probaShoot = 0.3;
 
@@ -18,11 +18,11 @@ public class GeneticAlgo {
 		_populationSize = populationSize;
 		_numberGenerations = numberGeneration;
 		_mutationRate = mutationRate;
-		_ar_champions = new ArrayList<Integer[]>();
+		_ar_champions = new ArrayList<Integer[][]>();
 	}
 
-	public Integer[] getBestStrategy() {
-		_ar_strategies = new ArrayList<Integer[]>();
+	public Integer[][] getBestStrategy() {
+		_ar_strategies = new ArrayList<Integer[][]>();
 		for (int i = 0; i < _populationSize; i++)
 			_ar_strategies.add(createRandomStrategy());
 //		Integer[] ar_home = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
@@ -46,23 +46,25 @@ public class GeneticAlgo {
 		return _ar_champions.get(getBestScoreId(scores));
 	}
 
-	private Integer[] createRandomStrategy() {
-		Integer[] strategy = new Integer[11];
+	public Integer[][] createRandomStrategy() {
+		Integer[][] strategy = new Integer[11][3];
 		Random random = new Random();
 		for (int i = 0; i < 11; i++) {
 			if(random.nextDouble() < _probaShoot) {
-				strategy[i] = -1;
+				strategy[i][0] = -1;
 			}
 			else {
-				strategy[i] = random.nextInt(12) - 1;
+				strategy[i][0] = random.nextInt(12) - 1;
 			}
+			strategy[i][1] = random.nextInt(1000);
+			strategy[i][2] = random.nextInt(600);
 		}
 		if (containCycle(strategy))
 			return createRandomStrategy();
 		return strategy;
 	}
 
-	public boolean containCycle(Integer[] strategy) {
+	public boolean containCycle(Integer[][] strategy) {
 		/*
 		 * Return true if strategy contains minimum 1 cycle
 		 */
@@ -70,10 +72,10 @@ public class GeneticAlgo {
 		for (int i = 0; i < 11; i++) {
 			currentPlayer = i;
 			nocycle: for (int j = 0; j < 12; j++) {
-				if (strategy[currentPlayer] == -1)
+				if (strategy[currentPlayer][0] == -1)
 					break nocycle;
 				else
-					currentPlayer = strategy[currentPlayer];
+					currentPlayer = strategy[currentPlayer][0];
 				if (j == 12)
 					return true;
 			}
@@ -81,9 +83,9 @@ public class GeneticAlgo {
 		return false;
 	}
 
-	private ArrayList<Integer[]> reproduction(Integer[] scores) {
+	private ArrayList<Integer[][]> reproduction(Integer[] scores) {
 		int strategyId1, strategyId2;
-		ArrayList<Integer[]> ar_newPopulation = new ArrayList<Integer[]>();
+		ArrayList<Integer[][]> ar_newPopulation = new ArrayList<Integer[][]>();
 		ar_newPopulation.add(_ar_strategies.get(getBestScoreId(scores)));
 		int totalScore = 0;
 		for (int i = 0; i < scores.length; i++)
@@ -167,16 +169,21 @@ public class GeneticAlgo {
 		return newStrategy;
 	}
 
-	private Integer[] mateOnePointCrossOver(Integer[] ar_strategy1,
-			Integer[] ar_strategy2) {
+	private Integer[][] mateOnePointCrossOver(Integer[][] ar_strategy1,
+			Integer[][] ar_strategy2) {
 		Random random = new Random();
 		int crossOverPoint = random.nextInt(12);
-		Integer[] ar_newStrategy = new Integer[11];
+		Integer[][] ar_newStrategy = new Integer[11][3];
 
-		for (int i = 0; i < crossOverPoint; i++)
-			ar_newStrategy[i] = ar_strategy1[i];
+		for (int i = 0; i < crossOverPoint; i++) {
+			for(int j = 0; j < 3; j++) {
+				ar_newStrategy[i][j] = ar_strategy1[i][j];
+			}
+		}
 		for (int i = crossOverPoint; i < 11; i++)
-			ar_newStrategy[i] = ar_strategy2[i];
+			for(int j = 0; j < 3; j++) {
+				ar_newStrategy[i][j] = ar_strategy2[i][j];
+			}
 
 		for (int i = 0; i < 11; i++) {
 			if (random.nextDouble() < _mutationRate) {
@@ -184,7 +191,7 @@ public class GeneticAlgo {
 				do {
 					newStrategy = random.nextInt(12) - 1;
 				} while (newStrategy == i);
-				ar_newStrategy[i] = newStrategy;
+				ar_newStrategy[i][0] = newStrategy;
 			}
 		}
 
@@ -208,10 +215,15 @@ public class GeneticAlgo {
 		return bestScoreId;
 	}
 
-	public void printStrategy(Integer[] strategy) {
+	public void printStrategy(Integer[][] strategy) {
 		for (int i = 0; i < strategy.length; i++) {
-			System.out.print(strategy[i] + " ");
+			System.out.print(i + "\t");
 		}
+		System.out.println();
+		for (int i = 0; i < strategy.length; i++) {
+			System.out.print(strategy[i][0] + "\t");
+		}
+		System.out.println();
 		System.out.println();
 
 	}

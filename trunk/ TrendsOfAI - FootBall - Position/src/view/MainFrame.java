@@ -44,4 +44,15 @@ public class MainFrame extends JFrame {
 		
 		match.run();
 	}
+	
+	public void run(Integer [][] ar_playerHome, Integer [][] ar_playerVisitor){
+		Team teamHome = new Team(_fieldPanel.getSize(), ar_playerHome);
+		Team teamVisitor = new Team(_fieldPanel.getSize(), ar_playerVisitor);
+		teamHome.printTeam();
+		teamVisitor.printTeam();
+		Match match = new Match(teamHome, teamVisitor, _fieldPanel);
+		_fieldPanel.initialiseParameters(match.getBall(), match.getAllPlayers(),teamHome,teamVisitor);
+		
+		match.run();
+	}
 }

@@ -51,15 +51,29 @@ public class Team {
 		}
 	}
 	
+	public Team(Dimension fieldDimension, Integer[][] ar_playerStrategy) {
+		this(fieldDimension);
+		_ar_player = new ArrayList<Player>();
+		for(int i = 0; i<_numberPlayers; i++) {
+			_ar_player.add(new Player(this, ar_playerStrategy[i][1], ar_playerStrategy[i][2], ar_playerStrategy[i][0], i));
+		}
+	}
+	
 	public void beginMatch(Match match, Color color, Location location) {
+		beginMatch(match, color, location, true);
+	}
+	
+	public void beginMatch(Match match, Color color, Location location, boolean replacePlayers) {
 		_match = match;
 		_location = location;
 		if(location==Location.HOME) {
-			replacePlayerHOME();
+			if(replacePlayers)
+				replacePlayerHOME();
 			_goal = new Goal(_fieldDimension.width, _fieldDimension.height/2, location);
 		}
 		else if(location==Location.VISITOR) {
-			replacePlayerVISITOR();
+			if(replacePlayers)
+				replacePlayerVISITOR();
 			_goal = new Goal(0, _fieldDimension.height/2, location);
 		}
 		for(Player player : _ar_player) {
