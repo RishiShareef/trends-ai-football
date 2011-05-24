@@ -25,8 +25,8 @@ public class GeneticAlgo {
 		_ar_strategies = new ArrayList<Integer[]>();
 		for (int i = 0; i < _populationSize; i++)
 			_ar_strategies.add(createRandomStrategy());
-//		Integer[] ar_home = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
-//		_ar_strategies.add(ar_home);
+		Integer[] ar_home = {1,-1,-1,-1,8,-1,-1,-1,-1,8,-1};;
+		_ar_strategies.add(ar_home);
 
 		Integer[] scores = new Championship(_ar_strategies).getScores();
 		_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
