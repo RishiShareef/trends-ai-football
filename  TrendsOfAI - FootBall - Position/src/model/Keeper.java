@@ -8,12 +8,7 @@ public class Keeper extends Player {
 	private static final double _keepingDistance = 100;
 
 	public Keeper(Team team, int pass) {
-		super(team, 0, 0, pass, 0);
-		if(team.getLocation() == Location.HOME)
-			_xPosition = 0;
-		else
-			_xPosition = team.getXFieldDimension();
-		_yPosition = team.getYFieldDimension()/2;
+		super(team, 0, team.getYFieldDimension()/2, pass, 0);
 	}
 	
 	public boolean interceptBall(Ball ball) {

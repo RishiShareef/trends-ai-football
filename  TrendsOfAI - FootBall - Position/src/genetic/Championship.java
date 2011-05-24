@@ -21,6 +21,29 @@ public class Championship {
 	}
 	
 	public Integer[] getScores(){
+		Match match;
+		int score;
+		Integer[] scores = new Integer[_ar_teams.size()+1];
+		for(int i=0;i<scores.length;i++)
+			scores[i]=0;
+		for(int i=0;i<_ar_teams.size();i++){
+			for(int j=i+1;j<_ar_teams.size();j++){
+				match = new Match(_ar_teams.get(i),_ar_teams.get(j),null);
+				score = match.run();
+				if(score == 0){
+					scores[i]+=1;
+					scores[j]+=1;
+				}else if(score > 0)
+					scores[i]+=3;
+				else
+					scores[j]+=3;
+			}
+		}
+		return scores;
+	}
+	
+	public Integer[] getGoalDifferences(){
+		int score;
 		Winner winner;
 		Match match;
 		Integer[] scores = new Integer[_ar_teams.size()+1];
@@ -29,16 +52,15 @@ public class Championship {
 		for(int i=0;i<_ar_teams.size();i++){
 			for(int j=i+1;j<_ar_teams.size();j++){
 				match = new Match(_ar_teams.get(i),_ar_teams.get(j),null);
-				winner = match.run();
-				if(winner == Winner.DRAW){
-					scores[i]+=1;
-					scores[j]+=1;
-				}else if(winner == Winner.HOME)
-					scores[i]+=3;
-				else
-					scores[j]+=3;
+				score = match.run();
+				scores[i]+=score;
+				scores[j]-=score;
 			}
 		}
+		
+		for(int i=0;i<_ar_teams.size();i++)
+			System.out.println("Team : " + i + ": " + scores[i]);
+		
 		return scores;
 	}
 	

@@ -11,7 +11,7 @@ public class GeneticAlgo {
 	private ArrayList<Integer[][]> _ar_strategies;
 	private ArrayList<Integer[][]> _ar_champions;
 	private static final double _reproductionRate = 1;
-	private static final double _probaShoot = 0.3;
+	private static final double _probaShoot = 0;
 
 	public GeneticAlgo(int populationSize, int numberGeneration,
 			double mutationRate) {
@@ -24,7 +24,7 @@ public class GeneticAlgo {
 	public Integer[][] getBestStrategy() {
 		_ar_champions.clear();
 		_ar_strategies = new ArrayList<Integer[][]>();
-		for (int i = 0; i < _populationSize; i++)
+		for (int i = 1; i < _populationSize; i++)
 			_ar_strategies.add(createRandomStrategy());
 //		Integer[] ar_home = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 //		_ar_strategies.add(ar_home);
@@ -50,7 +50,14 @@ public class GeneticAlgo {
 	public Integer[][] createRandomStrategy() {
 		Integer[][] strategy = new Integer[11][3];
 		Random random = new Random();
-		for (int i = 0; i < 11; i++) {
+		int randomPass;
+		do {
+			randomPass = random.nextInt(12)-1;
+		} while(randomPass == 0);
+		strategy[0][0] = randomPass;
+		strategy[0][1] = 0;
+		strategy[0][2] = 300;
+		for (int i = 1; i < 11; i++) {
 			if(random.nextDouble() < _probaShoot) {
 				strategy[i][0] = -1;
 			}
@@ -130,44 +137,64 @@ public class GeneticAlgo {
 		return currentTeam;
 	}
 
-	private Integer[] mateCycle(Integer[] strategy1, Integer[] strategy2) {
+	private Integer[][] mateCycle(Integer[][] strategy1, Integer[][] strategy2) {
 		Random random = new Random();
 		int ran;
-		Integer[] newStrategy = new Integer[11];
+		Integer[][] newStrategy = new Integer[11][3];
 		for (int i = 0; i < newStrategy.length; i++)
-			newStrategy[i] = null;
+			newStrategy[i][0] = null;
 		while (!isFull(newStrategy)) {
 			ran = random.nextInt(strategy1.length + strategy2.length);
 			if (ran > 10) {
 				ran = ran % 11;
-				while1: while (newStrategy[ran] == null) {
+				while1: while (newStrategy[ran][0] == null) {
 					if (random.nextDouble() > _mutationRate) {
-						newStrategy[ran] = strategy2[ran];
+						for(int i = 0; i<3; i++) {
+							newStrategy[ran][i] = strategy2[ran][i];
+						}
 					} else {
 						int randomPass;
 						do {
 							randomPass = random.nextInt(12) - 1;
 						} while (randomPass == ran);
-						newStrategy[ran] = randomPass;
+						newStrategy[ran][0] = randomPass;
+						if(ran == 0) {
+							newStrategy[ran][1] = 0;
+							newStrategy[ran][2] = 300;
+						}
+						else {
+							newStrategy[ran][1] = random.nextInt(1000);
+							newStrategy[ran][2] = random.nextInt(600);
+						}
 					}
-					if (newStrategy[ran] == -1)
+					if (newStrategy[ran][0] == -1)
 						break while1;
-					ran = newStrategy[ran];
+					ran = newStrategy[ran][0];
 				}
 			} else {
-				while2: while (newStrategy[ran] == null) {
+				while2: while (newStrategy[ran][0] == null) {
 					if (random.nextDouble() > _mutationRate) {
-						newStrategy[ran] = strategy1[ran];
+						for(int i = 0; i<3; i++) {
+							newStrategy[ran][i] = strategy1[ran][i];
+						}
 					} else {
 						int randomPass;
 						do {
 							randomPass = random.nextInt(12) - 1;
 						} while (randomPass == ran);
-						newStrategy[ran] = randomPass;
+						newStrategy[ran][0] = randomPass;
+						if(ran == 0) {
+							newStrategy[ran][1] = 0;
+							newStrategy[ran][2] = 300;
+						}
+						else {
+							newStrategy[ran][1] = random.nextInt(1000);
+							newStrategy[ran][2] = random.nextInt(600);
+						}
 					}
-					if (newStrategy[ran] == -1)
+					if (newStrategy[ran][0] == -1)
 						break while2;
-					ran = newStrategy[ran];
+					ran = newStrategy[ran][0];
 				}
 			}
 		}
@@ -203,9 +230,9 @@ public class GeneticAlgo {
 		return ar_newStrategy;
 	}
 
-	private boolean isFull(Integer[] ints) {
-		for (int i = 0; i < ints.length; i++) {
-			if (ints[i] == null)
+	private boolean isFull(Integer[][] ar_int) {
+		for (int i = 0; i < ar_int.length; i++) {
+			if (ar_int[i][0] == null)
 				return false;
 		}
 		return true;
@@ -221,10 +248,22 @@ public class GeneticAlgo {
 	}
 
 	public void printStrategy(Integer[][] strategy) {
+		System.out.print("player\t");
 		for (int i = 0; i < strategy.length; i++) {
 			System.out.print(i + "\t");
 		}
 		System.out.println();
+		System.out.print("posX\t");
+		for (int i = 0; i < strategy.length; i++) {
+			System.out.print(strategy[i][1] + "\t");
+		}
+		System.out.println();
+		System.out.print("posY\t");
+		for (int i = 0; i < strategy.length; i++) {
+			System.out.print(strategy[i][2] + "\t");
+		}
+		System.out.println();
+		System.out.print("strat\t");
 		for (int i = 0; i < strategy.length; i++) {
 			System.out.print(strategy[i][0] + "\t");
 		}
