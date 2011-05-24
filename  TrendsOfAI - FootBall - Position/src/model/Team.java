@@ -54,7 +54,8 @@ public class Team {
 	public Team(Dimension fieldDimension, Integer[][] ar_playerStrategy) {
 		this(fieldDimension);
 		_ar_player = new ArrayList<Player>();
-		for(int i = 0; i<_numberPlayers; i++) {
+		_ar_player.add(new Keeper(this, ar_playerStrategy[0][0]));
+		for(int i = 1; i<_numberPlayers; i++) {
 			_ar_player.add(new Player(this, ar_playerStrategy[i][1], ar_playerStrategy[i][2], ar_playerStrategy[i][0], i));
 		}
 	}
@@ -100,7 +101,7 @@ public class Team {
 			randomPass = random.nextInt(_numberPlayers);
 		}
 		while(randomPass == 1);
-		_ar_player.add(new Keeper(this, 0, 0, randomPass));
+		_ar_player.add(new Keeper(this, randomPass));
 		for(int i = 1; i<_numberPlayers; i++) {
 			do {
 				randomPass = random.nextInt(_numberPlayers);
@@ -221,4 +222,5 @@ public class Team {
 		return _ar_player.get(random.nextInt(_ar_player.size()));
 	}
 	public Player getPlayer(int i) {return _ar_player.get(i);}
+	public Goal getOwnGoal() {return _match.getOtherTeam(this).getGoal();}
 }

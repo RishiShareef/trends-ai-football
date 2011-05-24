@@ -54,7 +54,11 @@ public class GeneticAlgo {
 				strategy[i][0] = -1;
 			}
 			else {
-				strategy[i][0] = random.nextInt(12) - 1;
+				int myStrategy;
+				do {
+					myStrategy = random.nextInt(12) - 1;
+				} while(myStrategy == i);
+				strategy[i][0] = myStrategy;
 			}
 			strategy[i][1] = random.nextInt(1000);
 			strategy[i][2] = random.nextInt(600);
