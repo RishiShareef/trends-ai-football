@@ -69,12 +69,14 @@ public class Team {
 		_location = location;
 		if(location==Location.HOME) {
 			if(replacePlayers)
-				replacePlayerHOME();
+				replacePlayer();
 			_goal = new Goal(_fieldDimension.width, _fieldDimension.height/2, location);
 		}
 		else if(location==Location.VISITOR) {
 			if(replacePlayers)
-				replacePlayerVISITOR();
+				replacePlayer();
+			else
+			replacePlayerVisitor();
 			_goal = new Goal(0, _fieldDimension.height/2, location);
 		}
 		for(Player player : _ar_player) {
@@ -142,7 +144,7 @@ public class Team {
 		
 	}
 	
-	private void replacePlayerHOME(){
+	private void replacePlayer(){
 		
 //		_ar_player.get(0).setPosition(1*_fieldDimension.width/20, _fieldDimension.height/2);
 //		_ar_player.get(1).setPosition(5*_fieldDimension.width/20, _fieldDimension.height/8);
@@ -169,30 +171,11 @@ public class Team {
 		_ar_player.get(10).setPosition(14*_fieldDimension.width/20, 3*_fieldDimension.height/4);
 	}
 	
-	private void replacePlayerVISITOR(){
-//		_ar_player.get(0).setPosition(19*_fieldDimension.width/20, _fieldDimension.height/2);
-//		_ar_player.get(1).setPosition(15*_fieldDimension.width/20, _fieldDimension.height/8);
-//		_ar_player.get(2).setPosition(17*_fieldDimension.width/20, 3*_fieldDimension.height/8);
-//		_ar_player.get(3).setPosition(17*_fieldDimension.width/20, 5*_fieldDimension.height/8);
-//		_ar_player.get(4).setPosition(15*_fieldDimension.width/20, 7*_fieldDimension.height/8);
-//		_ar_player.get(5).setPosition(8*_fieldDimension.width/20, _fieldDimension.height/8);
-//		_ar_player.get(6).setPosition(11*_fieldDimension.width/20, 3*_fieldDimension.height/8);
-//		_ar_player.get(7).setPosition(11*_fieldDimension.width/20, 5*_fieldDimension.height/8);
-//		_ar_player.get(8).setPosition(8*_fieldDimension.width/20, 7*_fieldDimension.height/8);
-//		_ar_player.get(9).setPosition(5*_fieldDimension.width/20, _fieldDimension.height/4);
-//		_ar_player.get(10).setPosition(5*_fieldDimension.width/20, 3*_fieldDimension.height/4);
-		
-		_ar_player.get(0).setPosition(19*_fieldDimension.width/20, _fieldDimension.height/2);
-		_ar_player.get(1).setPosition(16*_fieldDimension.width/20, 2*_fieldDimension.height/8);
-		_ar_player.get(2).setPosition(16*_fieldDimension.width/20, 6*_fieldDimension.height/8);
-		_ar_player.get(3).setPosition(11*_fieldDimension.width/20, 1*_fieldDimension.height/6);
-		_ar_player.get(4).setPosition(11*_fieldDimension.width/20, 2*_fieldDimension.height/6);
-		_ar_player.get(5).setPosition(11*_fieldDimension.width/20, 3*_fieldDimension.height/6);
-		_ar_player.get(6).setPosition(11*_fieldDimension.width/20, 4*_fieldDimension.height/6);
-		_ar_player.get(7).setPosition(11*_fieldDimension.width/20, 5*_fieldDimension.height/6);
-		_ar_player.get(8).setPosition(6*_fieldDimension.width/20, _fieldDimension.height/4);
-		_ar_player.get(9).setPosition(6*_fieldDimension.width/20, 2*_fieldDimension.height/4);
-		_ar_player.get(10).setPosition(6*_fieldDimension.width/20, 3*_fieldDimension.height/4);
+	private void replacePlayerVisitor(){
+	
+		for(Player player : _ar_player) {
+			player.setPosition(_fieldDimension.width - player.getXPosition(), player.getYPosition());
+		}
 	}
 	
 	private Color generateRandomColor() {
