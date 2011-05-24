@@ -81,5 +81,13 @@ public class Match {
 	}
 	
 	public Ball getBall(){return _ball;}
+	public Team getOtherTeam(Team team) {
+		if(team == _teamHome)
+			return _teamVisitor;
+		else if(team == _teamVisitor)
+			return _teamHome;
+		else
+			return null;
+	}
 	
 }
