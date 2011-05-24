@@ -11,7 +11,7 @@ public class GeneticAlgo {
 	private ArrayList<Integer[]> _ar_strategies;
 	private ArrayList<Integer[]> _ar_champions;
 	private static final double _reproductionRate = 1;
-	private static final double _probaShoot = 0.3;
+	private static final double _probaShoot = 0;
 
 	public GeneticAlgo(int populationSize, int numberGeneration,
 			double mutationRate) {
@@ -25,8 +25,8 @@ public class GeneticAlgo {
 		_ar_strategies = new ArrayList<Integer[]>();
 		for (int i = 0; i < _populationSize; i++)
 			_ar_strategies.add(createRandomStrategy());
-		Integer[] ar_home = {1,-1,-1,-1,8,-1,-1,-1,-1,8,-1};;
-		_ar_strategies.add(ar_home);
+		//Integer[] ar_home = {1,-1,-1,-1,8,-1,-1,-1,-1,8,-1};;
+		//_ar_strategies.add(ar_home);
 
 		Integer[] scores = new Championship(_ar_strategies).getScores();
 		_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
@@ -86,12 +86,13 @@ public class GeneticAlgo {
 		ArrayList<Integer[]> ar_newPopulation = new ArrayList<Integer[]>();
 		ar_newPopulation.add(_ar_strategies.get(getBestScoreId(scores)));
 		int totalScore = 0;
-		for (int i = 0; i < scores.length; i++)
-			totalScore += scores[i];
+		Integer[] newScores = makeScorePositive(scores);
+		for (int i = 0; i < newScores.length; i++)
+			totalScore += newScores[i];
 		int numberReproducted = ((Double)((double)_populationSize * _reproductionRate)).intValue();
 		for (int i = 1; i < numberReproducted; i++) {
-			strategyId1 = chooseteam(scores, totalScore, -1);
-			strategyId2 = chooseteam(scores, totalScore, strategyId1);
+			strategyId1 = chooseteam(newScores, totalScore, -1);
+			strategyId2 = chooseteam(newScores, totalScore, strategyId1);
 			ar_newPopulation.add(mateOnePointCrossOver(_ar_strategies.get(strategyId1),
 					_ar_strategies.get(strategyId2)));
 		}
@@ -198,6 +199,18 @@ public class GeneticAlgo {
 		}
 		return true;
 	}
+	
+	private Integer[] makeScorePositive(Integer[] scores){
+		Integer[] newScores = new Integer[scores.length];
+		int minId = getWorstScoreId(scores);
+		if(scores[minId]<0){
+			for(int i=0;i<scores.length;i++){
+				newScores[i] = scores[i] - scores[minId];
+			}
+		}
+			
+		return newScores;
+	}
 
 	private int getBestScoreId(Integer[] scores) {
 		int bestScoreId = 0;
@@ -206,6 +219,15 @@ public class GeneticAlgo {
 				bestScoreId = i;
 		}
 		return bestScoreId;
+	}
+	
+	private int getWorstScoreId(Integer[] scores) {
+		int worstScoreId = 0;
+		for (int i = 1; i < scores.length; i++) {
+			if (scores[i] < scores[worstScoreId])
+				worstScoreId = i;
+		}
+		return worstScoreId;
 	}
 
 	public void printStrategy(Integer[] strategy) {

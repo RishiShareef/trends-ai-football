@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class Team {
 
+	private int _teamNumber;
 	private ArrayList<Player> _ar_player;
 	private Goal _goal; // The goal is the opponent's goal, that is the goal you want to shoot into ;)
 	private final static int _numberPlayers = 11;
@@ -43,12 +44,13 @@ public class Team {
 		_ar_player = ar_player;
 	}
 	
-	public Team(Dimension fieldDimension, Integer[] ar_playerStrategy) {
+	public Team(Dimension fieldDimension, Integer[] ar_playerStrategy, int teamNumber) {
 		this(fieldDimension);
 		_ar_player = new ArrayList<Player>();
 		for(int i = 0; i<_numberPlayers; i++) {
 			_ar_player.add(new Player(this, _fieldDimension.width/2, fieldDimension.height/2, ar_playerStrategy[i], i));
 		}
+		_teamNumber = teamNumber;
 	}
 	
 	public void beginMatch(Match match, Color color, Location location) {
@@ -194,8 +196,9 @@ public class Team {
 	public void printTeam() {
 		System.out.println("Team::printTeam >> ");
 		for(Player player : _ar_player) {
-			//player.print();
+			System.out.print(player.getPass() + " ");
 		}
+		System.out.println();
 	}
 
 	public Player getRandomPlayer() {
@@ -203,4 +206,5 @@ public class Team {
 		return _ar_player.get(random.nextInt(_ar_player.size()));
 	}
 	public Player getPlayer(int i) {return _ar_player.get(i);}
+	public int getTeamNumber(){return _teamNumber;}
 }

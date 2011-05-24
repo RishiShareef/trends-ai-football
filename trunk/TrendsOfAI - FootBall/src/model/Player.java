@@ -12,7 +12,7 @@ public class Player implements BallActor {
 	protected Team _team;
 	protected int _size;
 	protected Color _color;
-	protected int _pass; // 0 to shoot on goal, 1-11 for pass to player
+	protected int _pass; // -1 to shoot on goal, 0-10 for pass to player
 	protected int _playerPosition; // 1-11
 
 	public Player(Team team, int xPosition, int yPosition, int pass,
@@ -108,4 +108,6 @@ public class Player implements BallActor {
 					.getPlayer(_pass).getYPosition());
 		}
 	}
+	
+	public int getPass(){return _pass;}
 }

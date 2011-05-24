@@ -27,7 +27,7 @@ public class Match {
 		_ball = new Ball(_teamHome.getRandomPlayer(), this);
 	}
 	
-	public Winner run() {
+	public int run() {
 		int time = 0;
 		while(time < 1000) {
 			time++;
@@ -52,11 +52,13 @@ public class Match {
 			_ball.updatePosition();
 		}
 		
-		if(_teamHome.getScore() > _teamVisitor.getScore())
+		System.out.println("Match::run(): HOME : " + _teamHome.getTeamNumber() + " VISITOR : " + _teamVisitor.getTeamNumber() + " Score : " + _teamHome.getScore() + ":" +_teamVisitor.getScore());
+		/*if(_teamHome.getScore() > _teamVisitor.getScore())
 			return Winner.HOME;
 		else if(_teamHome.getScore() < _teamVisitor.getScore())
 			return Winner.VISITOR;
-		return Winner.DRAW;
+		return Winner.DRAW;*/
+		return (_teamHome.getScore()-_teamVisitor.getScore());
 	}
 	
 	public ArrayList<Player> getAllPlayers(){
