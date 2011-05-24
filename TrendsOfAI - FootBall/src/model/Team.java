@@ -194,11 +194,11 @@ public class Team {
 	public void setOpponent(Team opponent){_opponent=opponent;}
 	public Team getOpponent(){return _opponent;}
 	public void printTeam() {
-		System.out.println("Team::printTeam >> ");
+		/*System.out.println("Team::printTeam >> ");
 		for(Player player : _ar_player) {
 			System.out.print(player.getPass() + " ");
 		}
-		System.out.println();
+		System.out.println();*/
 	}
 
 	public Player getRandomPlayer() {
@@ -207,4 +207,5 @@ public class Team {
 	}
 	public Player getPlayer(int i) {return _ar_player.get(i);}
 	public int getTeamNumber(){return _teamNumber;}
+	public void resetScore(){_score=0;}
 }

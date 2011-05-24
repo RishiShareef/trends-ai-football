@@ -19,7 +19,7 @@ public class Championship {
 		for(int i=0;i<_ar_strategies.size();i++){
 			Team temp = new Team(_fieldDimension,_ar_strategies.get(i),i);
 			_ar_teams.add(temp);
-			System.out.print("Team " + i + " strategy : ");
+			//System.out.print("Team " + i + " strategy : ");
 			temp.printTeam();
 		}
 		
@@ -41,8 +41,8 @@ public class Championship {
 			}
 		}
 		
-		for(int i=0;i<_ar_teams.size();i++)
-			System.out.println("Team : " + i + ": " + scores[i]);
+		//for(int i=0;i<_ar_teams.size();i++)
+		//	System.out.println("Team : " + i + ": " + scores[i]);
 		
 		return scores;
 	}

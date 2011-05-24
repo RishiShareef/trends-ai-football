@@ -52,13 +52,16 @@ public class Match {
 			_ball.updatePosition();
 		}
 		
-		System.out.println("Match::run(): HOME : " + _teamHome.getTeamNumber() + " VISITOR : " + _teamVisitor.getTeamNumber() + " Score : " + _teamHome.getScore() + ":" +_teamVisitor.getScore());
+		//System.out.println("Match::run(): HOME : " + _teamHome.getTeamNumber() + " VISITOR : " + _teamVisitor.getTeamNumber() + " Score : " + _teamHome.getScore() + ":" +_teamVisitor.getScore());
 		/*if(_teamHome.getScore() > _teamVisitor.getScore())
 			return Winner.HOME;
 		else if(_teamHome.getScore() < _teamVisitor.getScore())
 			return Winner.VISITOR;
 		return Winner.DRAW;*/
-		return (_teamHome.getScore()-_teamVisitor.getScore());
+		int finalScore = _teamHome.getScore()-_teamVisitor.getScore();
+		_teamHome.resetScore();
+		_teamVisitor.resetScore();
+		return finalScore;
 	}
 	
 	public ArrayList<Player> getAllPlayers(){
