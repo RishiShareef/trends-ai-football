@@ -67,6 +67,7 @@ public class Team {
 	public void beginMatch(Match match, Color color, Location location, boolean replacePlayers) {
 		_match = match;
 		_location = location;
+		_score = 0;
 		if(location==Location.HOME) {
 			if(replacePlayers)
 				replacePlayer();
@@ -172,9 +173,8 @@ public class Team {
 	}
 	
 	private void replacePlayerVisitor(){
-	
 		for(Player player : _ar_player) {
-			player.setPosition(_fieldDimension.width - player.getXPosition(), player.getYPosition());
+			player.setVisitorPosition(_fieldDimension.width);
 		}
 	}
 	

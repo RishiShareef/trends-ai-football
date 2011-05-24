@@ -27,7 +27,7 @@ public class Match {
 		_ball = new Ball(_teamHome.getRandomPlayer(), this);
 	}
 	
-	public Winner run() {
+	public int run() {
 		int time = 0;
 		while(time < 1000) {
 			time++;
@@ -45,18 +45,14 @@ public class Match {
 			if(_fieldPanel!=null) {
 				_fieldPanel.repaint();
 				try {
-					Thread.sleep(500);
+					Thread.sleep(10);
 				} catch (Exception e) {e.printStackTrace();}
 			}
 			
 			_ball.updatePosition();
 		}
 		
-		if(_teamHome.getScore() > _teamVisitor.getScore())
-			return Winner.HOME;
-		else if(_teamHome.getScore() < _teamVisitor.getScore())
-			return Winner.VISITOR;
-		return Winner.DRAW;
+		return _teamHome.getScore()-_teamVisitor.getScore();
 	}
 	
 	public ArrayList<Player> getAllPlayers(){

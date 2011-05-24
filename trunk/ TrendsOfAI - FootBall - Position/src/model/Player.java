@@ -108,4 +108,8 @@ public class Player implements BallActor {
 					.getPlayer(_pass).getYPosition());
 		}
 	}
+
+	public void setVisitorPosition(int xFieldDimension) {
+		_xPosition = xFieldDimension - _xPosition;
+	}
 }
