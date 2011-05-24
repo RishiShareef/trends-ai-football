@@ -35,8 +35,8 @@ public class MainFrame extends JFrame {
 	}
 	
 	public void run(Integer [] ar_playerHome, Integer [] ar_playerVisitor){
-		Team teamHome = new Team(_fieldPanel.getSize(), ar_playerHome);
-		Team teamVisitor = new Team(_fieldPanel.getSize(), ar_playerVisitor);
+		Team teamHome = new Team(_fieldPanel.getSize(), ar_playerHome,1);
+		Team teamVisitor = new Team(_fieldPanel.getSize(), ar_playerVisitor,2);
 		teamHome.printTeam();
 		teamVisitor.printTeam();
 		Match match = new Match(teamHome, teamVisitor, _fieldPanel);
