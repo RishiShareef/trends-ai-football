@@ -1,0 +1,39 @@
+Meeting20110520
+...............
+
+REPRODUCTION
+------------
+
+Prise aléatoire des joueurs et puis on garde le cycle qui suit
+
+MUTATION
+--------
+
+Lors du copiage d'un joueur, il y a une probabilité de modifier l'action de ce joueur (en vérifiant évidemment que cela ne rajoute pas un cycle)
+Le cycle est alors terminé jusqu'à un marqueur
+
+SELECTION
+---------
+
+Le meilleur est gardé
+Probabilité de faire un enfant en fonction des points
+
+ORGANISATION TOURNOI
+--------------------
+
+Championnat de x équipes (50)
+Match 2 à 2 (pas d'aller retour)
+Points: 3 1 0
+
+ORGANISATION DES MATCHS
+-----------------------
+
+Nombre de tic par match :
+Interception : prob = 1/(1+(distance/10))
+Remise en jeu quand goal : Balle à joueur adverse aléatoire (plus tard peut être, emplacement aléatoire sur terrain -> joueur le plus proche)
+
+GENETIC
+-------
+
+X génération d'équipe
+Optionnel : à chaque génération, on retient le meilleur qui participera à la champions league !!!!!!!!!! 
