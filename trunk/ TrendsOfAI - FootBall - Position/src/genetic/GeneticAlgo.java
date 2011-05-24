@@ -22,6 +22,7 @@ public class GeneticAlgo {
 	}
 
 	public Integer[][] getBestStrategy() {
+		_ar_champions.clear();
 		_ar_strategies = new ArrayList<Integer[][]>();
 		for (int i = 0; i < _populationSize; i++)
 			_ar_strategies.add(createRandomStrategy());

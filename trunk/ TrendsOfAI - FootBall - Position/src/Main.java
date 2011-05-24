@@ -15,11 +15,11 @@ public class Main {
 		Integer[][] ar_home = new Integer [11][3];
 		Integer[][] ar_visitor = new Integer [11][3];
 		
-//		ar_home = algo.getBestStrategy();
-//		ar_visitor = algo.getBestStrategy();
+		ar_home = algo.getBestStrategy();
+		ar_visitor = algo.getBestStrategy();
 		
-		ar_home = algo.createRandomStrategy();
-		ar_visitor = algo.createRandomStrategy();
+//		ar_home = algo.createRandomStrategy();
+//		ar_visitor = algo.createRandomStrategy();
 		
 		System.out.println("Home strategy is");
 		algo.printStrategy(ar_home);
