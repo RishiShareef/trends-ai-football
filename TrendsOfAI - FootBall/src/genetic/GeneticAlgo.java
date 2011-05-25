@@ -231,9 +231,11 @@ public class GeneticAlgo {
 	}
 
 	public void printStrategy(Integer[] strategy) {
-		for (int i = 0; i < strategy.length; i++) {
-			System.out.print(strategy[i] + " ");
+		System.out.print("{");
+		for (int i = 0; i < strategy.length-1; i++) {
+			System.out.print(strategy[i] + ", ");
 		}
+		System.out.print(strategy[strategy.length-1] + "}");
 		System.out.println();
 
 	}

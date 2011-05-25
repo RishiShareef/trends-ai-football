@@ -51,7 +51,7 @@ public class Player implements BallActor {
 		if (distance > _visibility)
 			return false;
 		double passLength = Calculate.calculatePointDistance(alice.getXPosition(), alice.getYPosition(), bob.getXPosition(), bob.getYPosition());
-		double proba = 1 / (10*distance / passLength + 1);
+		double proba = calculateProba(distance, passLength);
 //		System.out.println("Player::interceptBall >> player " + _playerPosition
 //				+ "; proba = " + proba);
 		// proba = 0;
@@ -61,6 +61,25 @@ public class Player implements BallActor {
 			return true;
 		}
 		return false;
+	}
+
+	private double calculateProba(double distance, double passLength) {
+		/*
+		 * Calculates the proba to intercept a ball given the distance from trajectory and
+		 * the pass length
+		 */
+		double alpha = 0.005;
+		double beta = 0.002;
+		
+		if(distance > 1/alpha)
+			return 0;
+		if(passLength > 1/beta)
+			return 1;
+		
+		double probaDistance = 1-alpha*distance;
+		double probaPassLength = beta*passLength;
+		
+		return probaDistance*probaPassLength;
 	}
 
 	public void setPosition(int posX, int posY) {
