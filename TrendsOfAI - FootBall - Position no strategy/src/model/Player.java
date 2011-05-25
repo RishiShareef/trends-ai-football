@@ -14,6 +14,8 @@ public class Player implements BallActor {
 	protected Color _color;
 	protected int _pass; // 0 to shoot on goal, 1-11 for pass to player
 	protected int _playerPosition; // 1-11
+	protected final static double _alpha = 200;
+	protected final static double _beta = 500;
 
 	public Player(Team team, int xPosition, int yPosition, int pass,
 			int playerPosition) {
@@ -63,7 +65,7 @@ public class Player implements BallActor {
 		return false;
 	}
 	
-	private double calculateProba(double distance, double passLength) {
+	protected double calculateProba(double distance, double passLength) {
 		/*
 		 * Calculates the proba to intercept a ball given the distance from trajectory and
 		 * the pass length
@@ -71,9 +73,9 @@ public class Player implements BallActor {
 		double alpha = 0.005;
 		double beta = 0.002;
 		
-		if(distance > 1/alpha)
+		if(distance > _alpha)
 			return 0;
-		if(passLength > 1/beta)
+		if(passLength > _beta)
 			return 1;
 		
 		double probaDistance = 1-alpha*distance;

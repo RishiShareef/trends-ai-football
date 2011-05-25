@@ -23,8 +23,8 @@ public class Keeper extends Player {
 		BallActor bob = ball.getDesiredBallActor();
 
 		double shootLength = Calculate.calculatePointDistance(alice.getXPosition(), alice.getYPosition(), bob.getXPosition(), bob.getYPosition());
-		double proba = 1 / (shootLength/_keepingDistance + 1);
-
+		
+		double proba = calculateProba(0, shootLength);
 		Random random = new Random();
 		if (random.nextDouble() < proba) {
 			ball.setBallIntercepted(this);
