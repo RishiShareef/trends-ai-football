@@ -93,7 +93,7 @@ public class GeneticAlgo {
 		for (int i = 1; i < numberReproducted; i++) {
 			strategyId1 = chooseteam(newScores, totalScore, -1);
 			strategyId2 = chooseteam(newScores, totalScore, strategyId1);
-			ar_newPopulation.add(mateOnePointCrossOver(_ar_strategies.get(strategyId1),
+			ar_newPopulation.add(mateCycle(_ar_strategies.get(strategyId1),
 					_ar_strategies.get(strategyId2)));
 		}
 		for (int i = numberReproducted; i < _populationSize; i++) {
