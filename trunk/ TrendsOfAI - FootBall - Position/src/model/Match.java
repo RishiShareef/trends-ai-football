@@ -51,6 +51,9 @@ public class Match {
 			
 			_ball.updatePosition();
 		}
+		if(_fieldPanel!=null) {
+			_fieldPanel.showStrategies(true);
+		}
 		
 		return _teamHome.getScore()-_teamVisitor.getScore();
 	}

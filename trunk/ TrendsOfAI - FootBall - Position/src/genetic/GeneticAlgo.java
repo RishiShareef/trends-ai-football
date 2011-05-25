@@ -114,7 +114,6 @@ public class GeneticAlgo {
 		}
 		
 		return ar_newPopulation;
-
 	}
 
 	private int chooseteam(Integer[] scores, int totalScore, int firstTeam) {

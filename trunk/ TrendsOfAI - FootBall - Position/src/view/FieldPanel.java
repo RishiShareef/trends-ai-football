@@ -19,11 +19,13 @@ public class FieldPanel extends JPanel {
 	private Ball _ball;
 	private ArrayList<Player> _ar_player;
 	private Team _teamHome, _teamVisitor;
+	private boolean _showStrategies;
 
 	public FieldPanel(int xSize, int ySize) {
 		_xSize = xSize;
 		_ySize = ySize;
 		_ar_player = new ArrayList<Player>();
+		_showStrategies = false;
 		validate();
 		repaint();
 	}
@@ -38,7 +40,9 @@ public class FieldPanel extends JPanel {
 	public void paint(Graphics g) {
 		initialiseField(g);
 		drawPlayers(g);
-		drawBall(g);
+		if(!_showStrategies) {
+			drawBall(g);
+		}
 		drawScores(g);
 	}
 
@@ -60,6 +64,13 @@ public class FieldPanel extends JPanel {
 
 	private void drawPlayers(Graphics g) {
 		for(Player player : _ar_player){
+			if(_showStrategies) {
+				g.setColor(Color.BLACK);
+				int posX = player.getXPosition() + (player.getStrategyPosition().width - player.getXPosition())/3 - 3;
+				int posY = player.getYPosition() + (player.getStrategyPosition().height - player.getYPosition())/3 - 3;
+				g.fillRect(posX, posY, 6, 6);
+				g.drawLine(player.getXPosition(), player.getYPosition(), player.getStrategyPosition().width, player.getStrategyPosition().height);
+			}
 			int xPosition = player.getXPosition() - (player.getSize()/2);
 			int yPosition = player.getYPosition() - (player.getSize()/2);
 			g.setColor(player.getColor());
@@ -107,4 +118,9 @@ public class FieldPanel extends JPanel {
 	
 	public int getXSize() {return _xSize;}
 	public int getYSize() {return _ySize;}
+
+	public void showStrategies(boolean showStrategies) {
+		_showStrategies = showStrategies;
+		repaint();
+	}
 }
