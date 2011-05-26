@@ -35,13 +35,13 @@ public class GeneticAlgo {
 
 		Integer[] scores = new Championship(_ar_strategies).getScores();
 		_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
-		printStrategyScore(_ar_strategies.get(getBestScoreId(scores)));
+//		printStrategyScore(_ar_strategies.get(getBestScoreId(scores)));
 		for (int i = 1; i < _numberGenerations; i++) {
 			//System.out.println("Génération " + i);
 			_ar_strategies = reproduction(scores);
 			scores = new Championship(_ar_strategies).getScores();
 			_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
-			printStrategyScore(_ar_strategies.get(getBestScoreId(scores)));
+//			printStrategyScore(_ar_strategies.get(getBestScoreId(scores)));
 			
 			/*printStrategy(_ar_strategies.get(getBestScoreId(scores)));
 			System.out.println("Score : " + scores[getBestScoreId(scores)]);
@@ -50,7 +50,7 @@ public class GeneticAlgo {
 		}
 
 		scores = new Championship(_ar_champions).getScores();
-		printStrategyScore(_ar_champions.get(getBestScoreId(scores)));
+//		printStrategyScore(_ar_champions.get(getBestScoreId(scores)));
 		return _ar_champions.get(getBestScoreId(scores));
 	}
 
