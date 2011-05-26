@@ -51,6 +51,8 @@ public class Match {
 			
 			_ball.updatePosition();
 		}
+		_teamHome.endMatch();
+		_teamVisitor.endMatch();
 		
 		return _teamHome.getScore()-_teamVisitor.getScore();
 	}
