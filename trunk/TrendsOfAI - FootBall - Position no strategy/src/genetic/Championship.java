@@ -26,7 +26,7 @@ public class Championship {
 		Integer[] scores = new Integer[_ar_teams.size()+1];
 		for(int i=0;i<scores.length;i++)
 			scores[i]=0;
-		for(int k=0;k<3;k++){
+		for(int k=0;k<5;k++){
 			for(int i=0;i<_ar_teams.size();i++){
 				for(int j=i+1;j<_ar_teams.size();j++){
 					match = new Match(_ar_teams.get(i),_ar_teams.get(j),null);

@@ -15,7 +15,7 @@ public class Main {
 		Integer[][] ar_home = new Integer [11][3];
 		Integer[][] ar_visitor = new Integer [11][3];
 		
-		GeneticAlgo algo = new GeneticAlgo(new TG_442(), 30, 100, 0.2, 0);
+		GeneticAlgo algo = new GeneticAlgo(new TG_Next(), 30, 100, 0.2, 0);
 		ar_home = algo.getBestStrategy();
 		System.out.println("Best strategy is");
 		algo.printStrategyArray(ar_home);
