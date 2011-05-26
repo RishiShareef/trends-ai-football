@@ -11,7 +11,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+		System.out.println("Searching positions");
 		Integer[][] ar_home = new Integer [11][3];
 		Integer[][] ar_visitor = new Integer [11][3];
 		

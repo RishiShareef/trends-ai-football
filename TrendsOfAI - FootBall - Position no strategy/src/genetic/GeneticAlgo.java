@@ -15,10 +15,13 @@ public class GeneticAlgo {
 	private ArrayList<Integer[][]> _ar_champions;
 	private static final double _reproductionRate = 1;
 	private static final double _probaShoot = 0;
+	private static final int _numberTesting = 500;
 	private TeamGenerator _teamGenerator;
+	private TestingStrategy _tester;
 
 	public GeneticAlgo(TeamGenerator teamGenerator, int populationSize, int numberGeneration,
 			double mutationRate) {
+		_tester = new TestingStrategy(_numberTesting, teamGenerator);
 		_populationSize = populationSize;
 		_numberGenerations = numberGeneration;
 		_mutationRate = mutationRate;
@@ -36,16 +39,18 @@ public class GeneticAlgo {
 
 		Integer[] scores = new Championship(_ar_strategies).getScores();
 		_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
+		_tester.printTotalTest(_ar_strategies.get(getBestScoreId(scores)));
 		for (int i = 1; i < _numberGenerations; i++) {
-			System.out.println("Génération " + i);
+			//System.out.println("Génération " + i);
 			_ar_strategies = reproduction(scores);
 			scores = new Championship(_ar_strategies).getScores();
 			_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
+			_tester.printTotalTest(_ar_strategies.get(getBestScoreId(scores)));
 			
-			printStrategy(_ar_strategies.get(getBestScoreId(scores)));
+			/*printStrategy(_ar_strategies.get(getBestScoreId(scores)));
 			System.out.println("Score : " + scores[getBestScoreId(scores)]);
 			for (int k = 0; k < _ar_strategies.size(); k++)
-				printStrategy(_ar_strategies.get(k));
+				printStrategy(_ar_strategies.get(k));*/
 		}
 
 		scores = new Championship(_ar_champions).getScores();
