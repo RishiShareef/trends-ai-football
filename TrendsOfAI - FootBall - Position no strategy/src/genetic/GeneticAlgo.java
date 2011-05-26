@@ -15,7 +15,7 @@ public class GeneticAlgo {
 	private ArrayList<Integer[][]> _ar_champions;
 	private static final double _reproductionRate = 1;
 	private static final double _probaShoot = 0;
-	private int _numberTesting = 500;
+	private int _numberTesting;
 	private TeamGenerator _teamGenerator;
 	private TestingStrategy _tester;
 
