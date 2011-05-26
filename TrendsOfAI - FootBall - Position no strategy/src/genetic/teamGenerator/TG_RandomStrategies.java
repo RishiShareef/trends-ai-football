@@ -47,4 +47,9 @@ public class TG_RandomStrategies implements TeamGenerator {
 		}
 		return false;
 	}
+
+	@Override
+	public Integer[][] createBestSupposedTeam() {
+		return createTeam();
+	}
 }

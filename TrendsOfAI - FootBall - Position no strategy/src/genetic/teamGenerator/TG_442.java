@@ -30,4 +30,45 @@ public class TG_442 implements TeamGenerator {
 		return strategy;
 	}
 
+	@Override
+	public Integer[][] createBestSupposedTeam() {
+		Integer [][] ar_team = new Integer [11][3];
+		
+		ar_team = createTeam();
+		ar_team[0][1] = 0;
+		ar_team[0][2] = 0;
+		
+		ar_team[1][1] = 200;
+		ar_team[1][2] = 130;
+
+		ar_team[2][1] = 200;
+		ar_team[2][2] = 250;
+		
+		ar_team[3][1] = 200;
+		ar_team[3][2] = 350;
+		
+		ar_team[4][1] = 200;
+		ar_team[4][2] = 470;
+		
+		ar_team[5][1] = 500;
+		ar_team[5][2] = 130;
+		
+		ar_team[6][1] = 500;
+		ar_team[6][2] = 250;
+		
+		ar_team[7][1] = 500;
+		ar_team[7][2] = 350;
+		
+		ar_team[8][1] = 500;
+		ar_team[8][2] = 470;
+		
+		ar_team[9][1] = 780;
+		ar_team[9][2] = 200;
+		
+		ar_team[10][1] = 780;
+		ar_team[10][2] = 400;
+		
+		return ar_team;
+	}
+
 }
