@@ -77,7 +77,7 @@ public class Team {
 			if(replacePlayers)
 				replacePlayer();
 			else
-			replacePlayerVisitor();
+				replacePlayerVisitor();
 			_goal = new Goal(0, _fieldDimension.height/2, location);
 		}
 		for(Player player : _ar_player) {

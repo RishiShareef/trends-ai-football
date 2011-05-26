@@ -198,7 +198,7 @@ public class GeneticAlgo {
 				ar_newStrategy[i][j] = ar_strategy2[i][j];
 			}
 
-		for (int i = 0; i < 11; i++) {
+		for (int i = 1; i < 11; i++) {
 			if (random.nextDouble() < _mutationRate) {
 				ar_newStrategy[i][1] = random.nextInt(1000);
 				ar_newStrategy[i][2] = random.nextInt(600);
