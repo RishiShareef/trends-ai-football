@@ -11,7 +11,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		System.out.println("Searching only passes");
-		GeneticAlgo algo = new GeneticAlgo(20,20,0.2);
+		GeneticAlgo algo = new GeneticAlgo(25,50,0.2);
 		Integer[] best;
 		best = algo.getBestStrategy();		
 		System.out.println("Best strategy is");
