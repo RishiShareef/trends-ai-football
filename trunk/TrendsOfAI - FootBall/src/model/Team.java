@@ -76,7 +76,7 @@ public class Team {
 		}
 		ar_playerID = Calculate.permut(ar_playerID);
 		for(int i = 0; i<_ar_player.size(); i++) {
-			System.out.println("Team::acts >> + " + ar_playerID[i]);
+			//System.out.println("Team::acts >> + " + ar_playerID[i]);
 			_ar_player.get(ar_playerID[i]).acts(ball);
 		}
 	}
@@ -112,7 +112,7 @@ public class Team {
 		}
 		ar_playerID = Calculate.permut(ar_playerID);
 		for(int i = 0; i<_ar_player.size(); i++) {
-			System.out.println("Player " + ar_playerID[i]);
+			//System.out.println("Player " + ar_playerID[i]);
 			if(_ar_player.get(ar_playerID[i]).interceptBall(ball))
 				return true;
 		}

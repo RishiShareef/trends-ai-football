@@ -3,6 +3,8 @@ package genetic;
 import java.util.ArrayList;
 import java.util.Random;
 
+import model.TestingStrategy;
+
 public class GeneticAlgo {
 
 	private int _populationSize;
@@ -10,8 +12,10 @@ public class GeneticAlgo {
 	private double _mutationRate;
 	private ArrayList<Integer[]> _ar_strategies;
 	private ArrayList<Integer[]> _ar_champions;
+	private TestingStrategy _tester;
 	private static final double _reproductionRate = 1;
 	private static final double _probaShoot = 0;
+	private static final int _numberTest = 500;
 
 	public GeneticAlgo(int populationSize, int numberGeneration,
 			double mutationRate) {
@@ -19,6 +23,7 @@ public class GeneticAlgo {
 		_numberGenerations = numberGeneration;
 		_mutationRate = mutationRate;
 		_ar_champions = new ArrayList<Integer[]>();
+		_tester = new TestingStrategy(_numberTest);
 	}
 
 	public Integer[] getBestStrategy() {
@@ -30,19 +35,22 @@ public class GeneticAlgo {
 
 		Integer[] scores = new Championship(_ar_strategies).getScores();
 		_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
+		printStrategyScore(_ar_strategies.get(getBestScoreId(scores)));
 		for (int i = 1; i < _numberGenerations; i++) {
-			System.out.println("Génération " + i);
+			//System.out.println("Génération " + i);
 			_ar_strategies = reproduction(scores);
 			scores = new Championship(_ar_strategies).getScores();
 			_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
+			printStrategyScore(_ar_strategies.get(getBestScoreId(scores)));
 			
-			printStrategy(_ar_strategies.get(getBestScoreId(scores)));
+			/*printStrategy(_ar_strategies.get(getBestScoreId(scores)));
 			System.out.println("Score : " + scores[getBestScoreId(scores)]);
 			for (int k = 0; k < _ar_strategies.size(); k++)
-				printStrategy(_ar_strategies.get(k));
+				printStrategy(_ar_strategies.get(k));*/
 		}
 
 		scores = new Championship(_ar_champions).getScores();
+		printStrategyScore(_ar_champions.get(getBestScoreId(scores)));
 		return _ar_champions.get(getBestScoreId(scores));
 	}
 
@@ -238,5 +246,10 @@ public class GeneticAlgo {
 		System.out.print(strategy[strategy.length-1] + "}");
 		System.out.println();
 
+	}
+	
+	private void printStrategyScore(Integer[] strategy){
+		_tester.printTotalTest(strategy);
+		
 	}
 }
