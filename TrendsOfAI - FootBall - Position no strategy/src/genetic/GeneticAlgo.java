@@ -37,13 +37,14 @@ public class GeneticAlgo {
 			_ar_strategies.add(_teamGenerator.createTeam());
 //		Integer[] ar_home = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 //		_ar_strategies.add(ar_home);
-		_ar_strategies.add(_teamGenerator.createBestSupposedTeam());
+//		_ar_strategies.add(_teamGenerator.createBestSupposedTeam());
 
 		Integer[] scores = new Championship(_ar_strategies).getScores();
 		_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
 		_tester.printTotalTest(_ar_strategies.get(getBestScoreId(scores)));
 		for (int i = 1; i < _numberGenerations; i++) {
-			//System.out.println("GÃ©nÃ©ration " + i);
+			if(_numberTesting==0)
+				System.out.println("Génération " + i);
 			_ar_strategies = reproduction(scores);
 			scores = new Championship(_ar_strategies).getScores();
 			_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
