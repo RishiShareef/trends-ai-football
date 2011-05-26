@@ -206,4 +206,12 @@ public class Team {
 	}
 	public Player getPlayer(int i) {return _ar_player.get(i);}
 	public Goal getOwnGoal() {return _match.getOtherTeam(this).getGoal();}
+
+	public void endMatch() {
+		if(_location == Location.VISITOR) {
+			for(Player player : _ar_player) {
+				player.setVisitorPosition(_fieldDimension.width);
+			}
+		}
+	}
 }
