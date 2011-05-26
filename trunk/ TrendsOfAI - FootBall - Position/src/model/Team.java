@@ -178,6 +178,14 @@ public class Team {
 		}
 	}
 	
+	public void endMatch() {
+		if(_location == Location.VISITOR) {
+			for(Player player : _ar_player) {
+				player.setVisitorPosition(_fieldDimension.width);
+			}
+		}
+	}
+	
 	private Color generateRandomColor() {
 		Random random = new Random();
 		return new Color(random.nextInt(255), random.nextInt(255), random.nextInt(255));
@@ -206,4 +214,5 @@ public class Team {
 	}
 	public Player getPlayer(int i) {return _ar_player.get(i);}
 	public Goal getOwnGoal() {return _match.getOtherTeam(this).getGoal();}
+	
 }

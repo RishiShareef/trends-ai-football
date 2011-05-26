@@ -11,7 +11,7 @@ import model.Team;
 public class MainFrame extends JFrame {
 
 	private FieldPanel _fieldPanel;
-	private final static int _xSize = 1000, _ySize = 600;
+	public final static int _xSize = 1000, _ySize = 600;
 	
 	public MainFrame() {
 		setSize(_xSize, _ySize+40);
@@ -45,7 +45,7 @@ public class MainFrame extends JFrame {
 		match.run();
 	}
 	
-	public void run(Integer [][] ar_playerHome, Integer [][] ar_playerVisitor){
+	public void run(Integer [][] ar_playerHome, Integer [][] ar_playerVisitor, boolean showHomeStrategy, boolean showVisitorStrategy){
 		Team teamHome = new Team(_fieldPanel.getSize(), ar_playerHome);
 		Team teamVisitor = new Team(_fieldPanel.getSize(), ar_playerVisitor);
 		teamHome.printTeam();
@@ -54,5 +54,7 @@ public class MainFrame extends JFrame {
 		_fieldPanel.initialiseParameters(match.getBall(), match.getAllPlayers(),teamHome,teamVisitor);
 		
 		match.run();
+		
+		_fieldPanel.showStrategies(showHomeStrategy, showVisitorStrategy);
 	}
 }
