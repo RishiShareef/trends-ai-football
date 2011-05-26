@@ -15,12 +15,13 @@ public class GeneticAlgo {
 	private ArrayList<Integer[][]> _ar_champions;
 	private static final double _reproductionRate = 1;
 	private static final double _probaShoot = 0;
-	private static final int _numberTesting = 500;
+	private int _numberTesting = 500;
 	private TeamGenerator _teamGenerator;
 	private TestingStrategy _tester;
 
 	public GeneticAlgo(TeamGenerator teamGenerator, int populationSize, int numberGeneration,
-			double mutationRate) {
+			double mutationRate, int numberTesting) {
+		_numberTesting = numberTesting;
 		_tester = new TestingStrategy(_numberTesting, teamGenerator);
 		_populationSize = populationSize;
 		_numberGenerations = numberGeneration;
@@ -36,6 +37,7 @@ public class GeneticAlgo {
 			_ar_strategies.add(_teamGenerator.createTeam());
 //		Integer[] ar_home = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 //		_ar_strategies.add(ar_home);
+		_ar_strategies.add(_teamGenerator.createBestSupposedTeam());
 
 		Integer[] scores = new Championship(_ar_strategies).getScores();
 		_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
@@ -87,7 +89,7 @@ public class GeneticAlgo {
 		for (int i = 1; i < numberReproducted; i++) {
 			strategyId1 = chooseteam(scores, totalScore, -1);
 			strategyId2 = chooseteam(scores, totalScore, strategyId1);
-			ar_newPopulation.add(mateOnePointCrossOver(_ar_strategies.get(strategyId1),
+			ar_newPopulation.add(mateUniformCrossOver(_ar_strategies.get(strategyId1),
 					_ar_strategies.get(strategyId2)));
 		}
 		for (int i = numberReproducted; i < _populationSize; i++) {
@@ -197,6 +199,31 @@ public class GeneticAlgo {
 			for(int j = 0; j < 3; j++) {
 				ar_newStrategy[i][j] = ar_strategy2[i][j];
 			}
+
+		for (int i = 1; i < 11; i++) {
+			if (random.nextDouble() < _mutationRate) {
+				ar_newStrategy[i][1] = random.nextInt(1000);
+				ar_newStrategy[i][2] = random.nextInt(600);
+			}
+		}
+
+		return ar_newStrategy;
+	}
+	
+	public Integer [][] mateUniformCrossOver(Integer[][] ar_strategy1,
+			Integer[][] ar_strategy2) {
+		Random random = new Random();
+		
+		Integer [][] ar_newStrategy = new Integer [11][3];
+		for (int i = 0; i < 11; i++) {
+			int randomParent = random.nextInt(2);
+			for(int j = 0; j < 3; j++) {
+				if(randomParent == 0)
+					ar_newStrategy[i][j] = ar_strategy1[i][j];
+				else
+					ar_newStrategy[i][j] = ar_strategy1[i][j];
+			}
+		}
 
 		for (int i = 1; i < 11; i++) {
 			if (random.nextDouble() < _mutationRate) {

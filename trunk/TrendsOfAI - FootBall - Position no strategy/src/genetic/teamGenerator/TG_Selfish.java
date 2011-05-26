@@ -23,4 +23,9 @@ public class TG_Selfish implements TeamGenerator {
 		return strategy;
 	}
 
+	@Override
+	public Integer[][] createBestSupposedTeam() {
+		return createTeam();
+	}
+
 }

@@ -25,4 +25,9 @@ public class TG_Next implements TeamGenerator {
 		return strategy;
 	}
 
+	@Override
+	public Integer[][] createBestSupposedTeam() {
+		return createTeam();
+	}
+
 }
