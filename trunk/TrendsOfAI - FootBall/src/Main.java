@@ -10,7 +10,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		GeneticAlgo algo = new GeneticAlgo(20,500,0.2);
+		System.out.println("Searching only passes");
+		GeneticAlgo algo = new GeneticAlgo(20,100,0.2);
 		Integer[] best;
 		best = algo.getBestStrategy();		
 		System.out.println("Best strategy is");
