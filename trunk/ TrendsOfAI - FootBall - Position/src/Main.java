@@ -10,7 +10,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		GeneticAlgo algo = new GeneticAlgo(20,30,0.2);
+		GeneticAlgo algo = new GeneticAlgo(30,100,0.2);
 		
 		Integer[][] ar_home = new Integer [11][3];
 		Integer[][] ar_visitor = new Integer [11][3];
