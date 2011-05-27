@@ -37,7 +37,7 @@ public class GeneticAlgo {
 		_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
 //		printStrategyScore(_ar_strategies.get(getBestScoreId(scores)));
 		for (int i = 1; i < _numberGenerations; i++) {
-			//System.out.println("GÃ©nÃ©ration " + i);
+			System.out.println("Génération " + i);
 			_ar_strategies = reproduction(scores);
 			scores = new Championship(_ar_strategies).getScores();
 			_ar_champions.add(_ar_strategies.get(getBestScoreId(scores)));
