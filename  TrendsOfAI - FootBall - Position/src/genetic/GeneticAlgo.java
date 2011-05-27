@@ -68,8 +68,8 @@ public class GeneticAlgo {
 				} while(myStrategy == i);
 				strategy[i][0] = myStrategy;
 			}
-			strategy[i][1] = random.nextInt(1000);
-			strategy[i][2] = random.nextInt(600);
+			strategy[i][1] = random.nextInt(10)*100;
+			strategy[i][2] = random.nextInt(6)*100;
 		}
 		if (containCycle(strategy))
 			return createRandomStrategy();
@@ -223,6 +223,10 @@ public class GeneticAlgo {
 					newStrategy = random.nextInt(12) - 1;
 				} while (newStrategy == i);
 				ar_newStrategy[i][0] = newStrategy;
+			}
+			if(random.nextDouble() < _mutationRate) {
+				ar_newStrategy[i][1] = random.nextInt(10)*100;
+				ar_newStrategy[i][2] = random.nextInt(6)*100;
 			}
 		}
 
